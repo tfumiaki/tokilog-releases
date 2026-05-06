@@ -1,0 +1,99 @@
+Tokilog Third-Party Notices
+
+This file lists third-party components used by Tokilog alpha binary
+distributions. Third-party components are licensed by their respective
+copyright holders. Tokilog's Alpha Evaluation License does not replace or
+modify these third-party licenses.
+
+Tokilog alpha binaries are framework-dependent .NET applications. The
+.NET Runtime itself is not redistributed in the Tokilog zip assets; users
+install the .NET Runtime separately.
+
+Runtime and publish-related NuGet dependencies identified from the Tokilog CLI project:
+
+Microsoft packages
+------------------
+
+The following packages are published by Microsoft and use the MIT License:
+
+- Microsoft.Data.Sqlite.Core 10.0.7
+- Microsoft.EntityFrameworkCore 10.0.7
+- Microsoft.EntityFrameworkCore.Abstractions 10.0.7
+- Microsoft.EntityFrameworkCore.Analyzers 10.0.7
+- Microsoft.EntityFrameworkCore.Relational 10.0.7
+- Microsoft.EntityFrameworkCore.Sqlite 10.0.7
+- Microsoft.EntityFrameworkCore.Sqlite.Core 10.0.7
+- Microsoft.Extensions.Caching.Abstractions 10.0.7
+- Microsoft.Extensions.Caching.Memory 10.0.7
+- Microsoft.Extensions.Configuration.Abstractions 10.0.7
+- Microsoft.Extensions.DependencyInjection 10.0.7
+- Microsoft.Extensions.DependencyInjection.Abstractions 10.0.7
+- Microsoft.Extensions.DependencyModel 10.0.7
+- Microsoft.Extensions.Logging 10.0.7
+- Microsoft.Extensions.Logging.Abstractions 10.0.7
+- Microsoft.Extensions.Options 10.0.7
+- Microsoft.Extensions.Primitives 10.0.7
+- System.CommandLine 2.0.0-beta5.25306.1
+- System.Security.Cryptography.Pkcs 10.0.6
+- System.Security.Cryptography.Xml 10.0.6
+
+Copyright notice from the NuGet package metadata:
+
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+License:
+
+MIT License
+https://licenses.nuget.org/MIT
+
+Source and project references include:
+
+- https://github.com/dotnet/dotnet
+- https://github.com/dotnet/command-line-api
+- https://docs.microsoft.com/ef/core/
+- https://docs.microsoft.com/dotnet/standard/data/sqlite/
+- https://dot.net/
+
+SQLitePCLRaw packages
+---------------------
+
+The following packages are published by Eric Sink / SourceGear and use
+the Apache License 2.0:
+
+- SQLitePCLRaw.bundle_e_sqlite3 2.1.11
+- SQLitePCLRaw.core 2.1.11
+- SQLitePCLRaw.lib.e_sqlite3 2.1.11
+- SQLitePCLRaw.provider.e_sqlite3 2.1.11
+
+Copyright notice from the NuGet package metadata:
+
+Copyright 2014-2024 SourceGear, LLC
+
+License:
+
+Apache License 2.0
+https://licenses.nuget.org/Apache-2.0
+
+Source repository:
+
+https://github.com/ericsink/SQLitePCL.raw
+
+License text references
+-----------------------
+
+MIT License:
+https://licenses.nuget.org/MIT
+
+Apache License 2.0:
+https://licenses.nuget.org/Apache-2.0
+
+Dependency review note
+----------------------
+
+This NOTICE was prepared from:
+
+- `dotnet list src/Tokilog.Cli/Tokilog.Cli.csproj package --include-transitive --no-restore`
+- NuGet package metadata restored locally for the listed runtime packages
+
+Test-only packages are not listed because they are not part of the
+Tokilog alpha binary distribution.
