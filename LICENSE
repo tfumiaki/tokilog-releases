@@ -1,0 +1,119 @@
+Tokilog Alpha Evaluation License
+Version 0.1
+
+Copyright (c) 2026 Fumiaki Takashima (tfumiaki). All rights reserved.
+
+This license governs the alpha binary distributions of Tokilog made
+available from the public release-only repository at:
+
+https://github.com/tfumiaki/tokilog-releases
+
+Tokilog source code is not licensed under this license and is not
+published as part of the alpha distribution.
+
+1. Definitions
+
+"Tokilog" means the Tokilog CLI software and related files distributed
+as alpha release assets by the copyright holder.
+
+"Alpha Binary" means a compiled Tokilog release asset, including files
+such as `tokilog-net10.0-win-x64.zip` and
+`tokilog-net10.0-osx-arm64.zip`.
+
+"Evaluation Use" means installing and running an Alpha Binary for personal
+evaluation, internal evaluation, feedback, or compatibility testing.
+
+2. Evaluation License Grant
+
+Subject to this license, the copyright holder grants you a limited,
+non-exclusive, non-transferable, revocable license to download, install,
+and run the Alpha Binary solely for Evaluation Use.
+
+You may use Tokilog to record your own local time-tracking data during
+the evaluation period.
+
+This license does not grant permission for organization-wide rollout,
+team-wide production use, or business-critical operational use.
+
+3. Restrictions
+
+You may not:
+
+- redistribute, mirror, sublicense, rent, lease, sell, resell, or otherwise
+  make the Alpha Binary available to third parties;
+- distribute modified versions of Tokilog or files derived from the Alpha
+  Binary;
+- use Tokilog to provide a hosted service, SaaS offering, managed service,
+  or similar service for third parties;
+- reverse engineer, decompile, disassemble, or attempt to derive source
+  code from Tokilog, except to the extent such restriction is prohibited
+  by applicable law;
+- remove or alter copyright, license, or notice information;
+- use the Tokilog name, logo, or branding to promote an unofficial
+  distribution or derivative product;
+- claim that this alpha license grants any right to future commercial,
+  store, paid, or production versions of Tokilog.
+
+4. No Redistribution
+
+The Alpha Binary is provided for direct evaluation by recipients who
+obtain it from the official public release repository. Redistribution is
+not permitted without prior written permission from the copyright holder.
+
+5. Future Commercial Terms
+
+Tokilog may later be distributed through application stores, paid licenses,
+subscription plans, or other commercial terms. The copyright holder reserves
+all rights to change Tokilog's pricing, license terms, distribution channels,
+features, and availability.
+
+This alpha license does not grant any production license, commercial use
+license, store license, support entitlement, maintenance entitlement, or
+right to receive future versions.
+
+6. Third-Party Components
+
+Tokilog may include or depend on third-party components. Those components
+are licensed by their respective copyright holders under their respective
+licenses. See `NOTICE` for third-party notices.
+
+This license does not modify or limit rights you may have under third-party
+component licenses.
+
+7. Data and Local Storage
+
+Tokilog stores time-tracking data locally. You are responsible for backing
+up, exporting, protecting, and deleting your own data.
+
+8. Alpha Software
+
+Tokilog alpha releases are experimental and may contain defects, incomplete
+features, breaking changes, data format changes, or behavior that differs
+from future releases.
+
+9. Disclaimer of Warranty
+
+TOKILOG IS PROVIDED "AS IS" AND "AS AVAILABLE", WITHOUT WARRANTIES OF ANY
+KIND, WHETHER EXPRESS, IMPLIED, STATUTORY, OR OTHERWISE, INCLUDING WITHOUT
+LIMITATION WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE,
+TITLE, AND NON-INFRINGEMENT.
+
+10. Limitation of Liability
+
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE COPYRIGHT HOLDER
+WILL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL,
+EXEMPLARY, OR PUNITIVE DAMAGES, OR FOR ANY LOSS OF DATA, LOSS OF PROFITS,
+LOSS OF BUSINESS, BUSINESS INTERRUPTION, OR COST OF SUBSTITUTE GOODS OR
+SERVICES, ARISING OUT OF OR RELATED TO TOKILOG OR THIS LICENSE, EVEN IF
+ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+11. Termination
+
+This license terminates automatically if you violate its terms. Upon
+termination, you must stop using Tokilog and delete all copies of the Alpha
+Binary in your possession or control.
+
+12. Reservation of Rights
+
+All rights not expressly granted in this license are reserved by the
+copyright holder.
