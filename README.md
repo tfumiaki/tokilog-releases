@@ -34,7 +34,7 @@ dotnet --list-runtimes
 
 ## Data Storage
 
-Tokilog は記録データをローカル SQLite DB に保存します。サーバーへの同期は行いません。
+Tokilog は記録データをローカル SQLite DB に保存します。サーバー同期などの機能はありません。
 
 既定の DB 保存場所:
 
