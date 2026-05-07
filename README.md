@@ -2,7 +2,7 @@
 
 Tokilog は、ローカル保存を前提にした軽量な時間記録 CLI ツールです。
 
-この repository は Tokilog の一般ユーザー向け配布専用 repository です。ソースコード、開発中の Issue / PR、内部向け設計ドキュメントはここには置きません。
+この repository は Tokilog の一般ユーザー向け配布専用 repository です。ソースコード、開発中の Issue / PR、内部向け設計ドキュメントは非公開です。
 
 ## Alpha Release
 
