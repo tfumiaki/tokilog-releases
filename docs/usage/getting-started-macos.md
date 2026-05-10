@@ -9,9 +9,9 @@ Tokilog はローカル保存を前提にした軽量な時間記録ツールで
 - macOS
 - zsh
 - Apple Silicon Mac (`osx-arm64`)
-- .NET 10 Runtime または .NET 10 SDK
+- .NET 10 Runtime
 
-alpha で配布している macOS 向け成果物は **`osx-arm64` のみ**です。Intel Mac / `osx-x64` 向けの配布手順は現時点では未整備です。
+現在配布している macOS 向け成果物は **`osx-arm64` のみ**です。Intel Mac / `osx-x64` 向けの配布手順は現時点では未整備です。
 
 配布される `tl` は `SelfContained=false` の single-file publish です。実行環境には **.NET 10 Runtime** が必要です。
 
@@ -170,20 +170,11 @@ tl today --debug
 
 ## 補完を使う場合
 
-Tokilog CLI は `System.CommandLine` の `[suggest]` directive と `dotnet-suggest` を使って Tab 補完を提供します。zsh で補完を使う場合は `dotnet-suggest` のセットアップが必要です。
+Tokilog CLI は `tl completion zsh` で zsh 向けの native completion script を出力します。
 
-最小セットアップ例:
+補完は任意機能です。command / option の静的候補に加えて、ローカル DB に存在する project / tag / detail を動的候補として表示できます。
 
-```console
-dotnet tool install -g dotnet-suggest
-dotnet-suggest register --command-path ~/Applications/Tokilog/tl
-dotnet-suggest script Zsh >> ~/.zshrc
-source ~/.zshrc
-```
-
-`~/.local/bin/tl` を使っている場合は、`--command-path` に実際の `tl` のパスを指定してください。
-
-Tokilog は alpha では `tl completion zsh` や `tl completion install` のような補完セットアップコマンドを提供しません。
+セットアップ手順は [CLI Tab 補完の利用手順](./completion.md) を参照してください。Tokilog は `tl completion install` のような shell profile 自動編集コマンドは提供しません。
 
 ## アンインストール
 
@@ -221,11 +212,7 @@ Tokilog 用のアプリデータディレクトリごと削除する場合:
 rm -rf "$HOME/Library/Application Support/Tokilog"
 ```
 
-`dotnet-suggest` は Tokilog 以外でも使う可能性があります。不要な場合のみアンインストールしてください。
-
-```console
-dotnet tool uninstall --global dotnet-suggest
-```
+Tab 補完を設定していた場合は、`~/.zshrc` などに追加した `tl completion zsh` の出力部分を削除してください。
 
 ## トラブルシュート
 
