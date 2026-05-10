@@ -21,6 +21,8 @@ Tokilog は現在 alpha 段階です。CLI (`tl`) を先行配布しており、
 
 - [Windows Getting Started](docs/usage/getting-started-windows.md)
 - [macOS Getting Started](docs/usage/getting-started-macos.md)
+- [CLI Manual](docs/usage/cli-manual.md)
+- [CLI Tab Completion](docs/usage/completion.md)
 
 ## Runtime
 
