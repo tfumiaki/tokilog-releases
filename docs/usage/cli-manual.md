@@ -372,6 +372,7 @@ TOKILOG_DB_PATH=/tmp/tokilog-test.db tl today
 |----|--------------|
 | Windows | `%LOCALAPPDATA%\Tokilog\tokilog.log` |
 | macOS | `~/Library/Application Support/Tokilog/tokilog.log` |
+| Linux | `~/.local/share/Tokilog/tokilog.log` |
 
 環境変数 `TOKILOG_LOG_PATH` に絶対パスを指定すると、ログファイルパスを上書きできます。
 
