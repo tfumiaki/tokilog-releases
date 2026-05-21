@@ -136,10 +136,31 @@ macOS の既定 DB 保存場所:
 
 Tokilog 本体を削除しても、この DB ファイルは自動では削除されません。記録データを残したい場合は、そのままにしてください。
 
-開発・テスト用途では環境変数 `TOKILOG_DB_PATH` で DB パスを上書きできます。通常利用では既定保存場所のまま使うことを想定しています。本番利用中に上書きする場合は、別 DB に切り替わる点に注意してください。
+### データディレクトリの上書き（開発・テスト用）
+
+環境変数 `TOKILOG_DATA_DIR` にデータディレクトリの絶対パスを指定するとデータディレクトリを上書きできます。DB ファイル名は `tokilog.db` で固定です。`TOKILOG_DATA_DIR` にはディレクトリパスを指定します。`tokilog.db` まで含めてはいけません。通常利用では既定保存場所のまま使うことを想定しています。
 
 ```console
-TOKILOG_DB_PATH=/tmp/tokilog-test.db tl today
+export TOKILOG_DATA_DIR="$HOME/Library/Application Support/Tokilog"
+tl today
+# → DB ファイル: ~/Library/Application Support/Tokilog/tokilog.db
+```
+
+`TOKILOG_DATA_PATH` は採用していません（ファイルパスではなくディレクトリであることを明確にするため、`_DIR` を使用しています）。
+
+> **破壊的変更**: `TOKILOG_DB_PATH` は廃止されました。以前 `TOKILOG_DB_PATH` でパスを指定していた場合は `TOKILOG_DATA_DIR` に移行してください。
+
+### 既存 DB を使い続ける場合（`TOKILOG_DB_PATH` からの移行）
+
+以前 `TOKILOG_DB_PATH` で別パスの DB ファイルを指定していた場合は、次の手順で既存 DB を使い続けられます。
+
+1. 新しいデータディレクトリを作成する（例: `~/Library/Application Support/Tokilog`）
+2. 以前 `TOKILOG_DB_PATH` で指定していた DB ファイルを `tokilog.db` という名前で上記ディレクトリへコピーまたは移動する
+3. `TOKILOG_DATA_DIR` にそのディレクトリを設定する
+
+```console
+export TOKILOG_DATA_DIR="$HOME/Library/Application Support/Tokilog"
+# → DB ファイル: ~/Library/Application Support/Tokilog/tokilog.db
 ```
 
 ## ログ保存場所

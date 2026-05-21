@@ -123,6 +123,28 @@ tl today
 
 PowerShell では `@project` や `#tag` をそのまま書くと別の構文として解釈される場合があります。Windows の PowerShell で試すときは、例のように `"@tokilog"`、`"#docs"` と引用符で囲むと安全です。
 
+## PowerShell 特有の入力ルール
+
+PowerShell では `@` と `#` が shell 固有の構文として扱われます。Tokilog で project (`@project`) や tag (`#tag`) を入力するときは、必ずダブルクォートで囲んでください。
+
+| 文字 | PowerShell での扱い | Tokilog での入力例 |
+|------|-------------------|------------------|
+| `#` | コメント開始。`#` 以降の入力がすべて無視される | `"#docs"` |
+| `@` | splatting 演算子。変数展開が試みられエラーになることがある | `"@tokilog"` |
+
+```powershell
+# 正しい: ダブルクォートで囲む
+tl start "Getting Started を読む" "@tokilog" "#docs"
+
+# NG: #docs 以降がコメントとして無視され、tag が渡されない
+tl start "Getting Started を読む" "@tokilog" #docs
+
+# NG: @tokilog が splatting として解釈され、予期しないエラーになる
+tl start "Getting Started を読む" @tokilog "#docs"
+```
+
+`"#docs"` や `"@tokilog"` の引用符は PowerShell に対してのもので、Tokilog に渡る値は `#docs` / `@tokilog` と同じです。`#` の問題はエラーが出ず tag が無視されるだけなので特に注意してください。
+
 ## データ保存場所
 
 Tokilog CLI は記録データをローカル SQLite DB に保存します。サーバーへの同期は行いません。
@@ -135,11 +157,31 @@ Windows のデフォルト DB 保存場所:
 
 DB ファイルは Tokilog 本体とは別に保存されます。zip の展開先フォルダーを削除しても、記録データは自動では削除されません。
 
-開発・テスト用途では、環境変数 `TOKILOG_DB_PATH` に絶対パスを指定すると DB パスを上書きできます。通常利用ではデフォルト保存場所のまま使うことを想定しています。
+### データディレクトリの上書き（開発・テスト用）
+
+環境変数 `TOKILOG_DATA_DIR` にデータディレクトリの絶対パスを指定すると、データディレクトリを上書きできます。DB ファイル名は `tokilog.db` で固定です。`TOKILOG_DATA_DIR` にはディレクトリパスを指定します。`tokilog.db` まで含めてはいけません。通常利用ではデフォルト保存場所のまま使うことを想定しています。
 
 ```powershell
-$env:TOKILOG_DB_PATH = "C:\tmp\my_tokilog.db"
+$env:TOKILOG_DATA_DIR = "C:\Users\me\AppData\Local\Tokilog"
 tl today
+# → DB ファイル: C:\Users\me\AppData\Local\Tokilog\tokilog.db
+```
+
+`TOKILOG_DATA_PATH` は採用していません（ファイルパスではなくディレクトリであることを明確にするため、`_DIR` を使用しています）。
+
+> **破壊的変更**: `TOKILOG_DB_PATH` は廃止されました。以前 `TOKILOG_DB_PATH` でパスを指定していた場合は `TOKILOG_DATA_DIR` に移行してください。
+
+### 既存 DB を使い続ける場合（`TOKILOG_DB_PATH` からの移行）
+
+以前 `TOKILOG_DB_PATH` で別パスの DB ファイルを指定していた場合は、次の手順で既存 DB を使い続けられます。
+
+1. 新しいデータディレクトリを作成する（例: `C:\Users\me\AppData\Local\Tokilog`）
+2. 以前 `TOKILOG_DB_PATH` で指定していた DB ファイルを `tokilog.db` という名前で上記ディレクトリへコピーまたは移動する
+3. `TOKILOG_DATA_DIR` にそのディレクトリを設定する
+
+```powershell
+$env:TOKILOG_DATA_DIR = "C:\Users\me\AppData\Local\Tokilog"
+# → DB ファイル: C:\Users\me\AppData\Local\Tokilog\tokilog.db
 ```
 
 ## ログ保存場所と --debug
@@ -226,7 +268,7 @@ Remove-Item $tokilogCompletion
 | `tl` が見つからない | PATH に追加したフォルダーが `tl.exe` のあるフォルダーか確認し、新しい PowerShell を開き直す |
 | .NET Runtime のエラーが出る | `dotnet --list-runtimes` で .NET 10 Runtime または SDK が入っているか確認する |
 | DB 作成に失敗する | `%LOCALAPPDATA%\Tokilog` を作成できる権限があるか確認する |
-| 記録データが見つからない | `TOKILOG_DB_PATH` を設定して別 DB を参照していないか確認する |
+| 記録データが見つからない | `TOKILOG_DATA_DIR` を設定して別のデータディレクトリを参照していないか確認する |
 | エラーの原因を詳しく見たい | `tl doctor`、`tl --debug today`、ログファイルを確認する |
 
 DB と log の場所:
