@@ -132,12 +132,13 @@ tl now 実装 "@tokilog" "#dev"
 
 ## 既存記録の作業情報を再利用する
 
-`tl start`、`tl switch`、`tl add`、`tl fill`、`tl now` では、既存エントリの detail / project / tags をテンプレートとして再利用できます。
+`tl start`、`tl switch`、`tl add`、`tl fill`、`tl now`、`tl edit` では、既存エントリの detail / project / tags をテンプレートとして再利用できます。
 
 ```console
 tl start --template-id a1b2c3d4
 tl add --template-within 10:45 --from 13:00 --to 14:00
 tl switch 別タスク名 --template-id a1b2c3d4
+tl edit --id a1b2c3d4 --template-id e5f6a7b8
 ```
 
 | オプション | 意味 |
@@ -145,7 +146,7 @@ tl switch 別タスク名 --template-id a1b2c3d4
 | `--template-id <id>` | 指定 ID のエントリから作業情報を補完する |
 | `--template-within <time>` | 指定時刻を含むエントリから作業情報を補完する |
 
-コマンドラインで明示した detail / `@project` / `#tag` はテンプレートより優先されます。時刻、状態、ID、作成日時はコピーされません。
+コマンドラインで明示した detail / `@project` / `#tag` はテンプレートより優先されます。`tl edit --reset-tags` も tags の明示指定として扱われます。時刻、状態、ID、作成日時はコピーされません。
 
 ## 記録を確認する
 
@@ -181,6 +182,7 @@ tl day 2026-05-01 --gaps
 tl edit --id a1b2c3d4 --from 10:00 --to 11:00
 tl edit --id a1b2c3d4 --detail "設計レビュー"
 tl edit --id a1b2c3d4 設計レビュー "@tokilog" "#review"
+tl edit --id a1b2c3d4 --template-id e5f6a7b8
 ```
 
 ID は `tl today` や `tl day` に表示される短縮 ID を使います。短縮 ID が複数候補に一致する場合は、より長い ID を指定して再実行します。
@@ -192,6 +194,16 @@ tl edit --within 10:45 --detail "設計レビュー"
 ```
 
 `--within` は指定時刻を含むエントリを探します。重複により複数候補がある場合、TTY では候補選択、非 TTY ではエラーになります。
+
+### タグを削除・再設定する
+
+```console
+tl edit --id a1b2c3d4 --reset-tags
+tl edit --id a1b2c3d4 --reset-tags dev review
+tl edit --id a1b2c3d4 --reset-tags "#dev" "#review"
+```
+
+`--reset-tags` は tags を空にします。値を続けた場合は、その tag 一覧に置き換えます。`#tag` と `--reset-tags` は同時に指定できません。
 
 ### 削除する
 
