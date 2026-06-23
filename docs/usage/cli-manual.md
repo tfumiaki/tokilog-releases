@@ -156,6 +156,7 @@ tl edit --id a1b2c3d4 --template-id e5f6a7b8
 tl today
 tl today --dups
 tl today --gaps
+tl today --summary
 ```
 
 `tl today` は今日のエントリを開始時刻順に表示します。表示には短縮 ID、開始・終了時刻、経過時間、状態、detail、project、tags が含まれます。
@@ -164,15 +165,18 @@ tl today --gaps
 
 `tl today --gaps` は今日の未記録時間帯を表示します。
 
+`tl today --summary` は今日の完了済みエントリを project / tag / detail 単位で集計します。実行中タイマーは集計対象外です。
+
 ### 指定日の記録
 
 ```console
 tl day 2026-05-01
 tl day 2026-05-01 --dups
 tl day 2026-05-01 --gaps
+tl day 2026-05-01 --summary
 ```
 
-`tl day <YYYY-MM-DD>` は指定日のエントリを表示します。`--gaps` を付けると、指定日の未記録時間帯を表示します。
+`tl day <YYYY-MM-DD>` は指定日のエントリを表示します。`--gaps` を付けると、指定日の未記録時間帯を表示します。`--summary` を付けると、指定日の完了済みエントリを project / tag / detail 単位で集計します。
 
 ## 記録を編集・削除する
 

@@ -1,23 +1,23 @@
 # docs/usage
 
-Tokilog CLI の利用者向けセットアップ手順や操作ガイドを格納します。
+Tokilog の利用者向けセットアップ手順や操作ガイドを格納します。
 
 ## どこから読めばよいか
 
-初めて Tokilog CLI を使う場合は、利用環境の Getting Started を最初に読んでください。インストール・PATH 設定・最初のコマンドまでひととおり通せます。
+初めて Tokilog を使う場合は、利用環境の Getting Started を最初に読んでください。CLI (`tl`) と Desktop GUI の release artifact、CLI の PATH 設定、最初のコマンドまでひととおり確認できます。
 
-1. 利用環境に合わせた Getting Started を読み、`tl` を実行できる状態にする
+1. 利用環境に合わせた Getting Started を読み、CLI または Desktop GUI を取得する
    - macOS: [getting-started-macos.md](./getting-started-macos.md)
    - Windows: [getting-started-windows.md](./getting-started-windows.md)
-2. 日常操作のコマンドは [cli-manual.md](./cli-manual.md) を参照する
+2. CLI の日常操作コマンドは [cli-manual.md](./cli-manual.md) を参照する
 3. （任意）Tab 補完を使う場合は [completion.md](./completion.md) をセットアップする
 
 ## ドキュメント一覧
 
 | ファイル | 説明 |
 |---------|------|
-| [getting-started-macos.md](./getting-started-macos.md) | macOS 向け Tokilog CLI Getting Started |
-| [getting-started-windows.md](./getting-started-windows.md) | Windows 向け Tokilog CLI Getting Started |
+| [getting-started-macos.md](./getting-started-macos.md) | macOS 向け Tokilog Getting Started |
+| [getting-started-windows.md](./getting-started-windows.md) | Windows 向け Tokilog Getting Started |
 | [cli-manual.md](./cli-manual.md) | Tokilog CLI の日常操作マニュアル |
 | [completion.md](./completion.md) | Tokilog CLI Tab 補完の利用手順（任意） |
 

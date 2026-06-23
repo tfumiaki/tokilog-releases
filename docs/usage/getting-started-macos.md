@@ -1,8 +1,8 @@
-# Tokilog CLI macOS Getting Started
+# Tokilog macOS Getting Started
 
-このドキュメントは、macOS で Tokilog CLI (`tl`) を手動導入して使い始めるための一般ユーザー向け手順です。
+このドキュメントは、macOS で Tokilog CLI (`tl`) または Desktop GUI を手動導入して使い始めるための一般ユーザー向け手順です。
 
-Tokilog はローカル保存を前提にした軽量な時間記録ツールです。作業開始、停止、今日の記録確認を CLI から短いコマンドで実行できます。
+Tokilog はローカル保存を前提にした軽量な時間記録ツールです。CLI では作業開始、停止、今日の記録確認を短いコマンドで実行できます。Desktop GUI は同じローカル DB と Application ロジックを使う alpha build です。
 
 ## 対象環境
 
@@ -13,7 +13,7 @@ Tokilog はローカル保存を前提にした軽量な時間記録ツールで
 
 現在配布している macOS 向け成果物は **`osx-arm64` のみ**です。Intel Mac / `osx-x64` 向けの配布手順は現時点では未整備です。
 
-配布される `tl` は `SelfContained=false` の single-file publish です。実行環境には **.NET 10 Runtime** が必要です。
+配布される CLI (`tl`) と Desktop GUI は `SelfContained=false` の publish です。実行環境には **.NET 10 Runtime** が必要です。
 
 ```console
 dotnet --list-runtimes
@@ -26,19 +26,23 @@ dotnet --list-runtimes
 [Tokilog Releases](https://github.com/tfumiaki/tokilog-releases/releases) から macOS Apple Silicon 用 zip をダウンロードします。
 
 ```text
-tokilog-net10.0-osx-arm64.zip
+CLI
+tokilog-cli-net10.0-osx-arm64.zip
+
+Desktop GUI
+tokilog-desktop-net10.0-osx-arm64.zip
 ```
+
+CLI を使う場合は `tokilog-cli-net10.0-osx-arm64.zip`、Desktop GUI を試す場合は `tokilog-desktop-net10.0-osx-arm64.zip` を取得してください。
 
 現在の publish 条件:
 
-| 項目 | 値 |
-|------|----|
-| Target Framework | `net10.0` |
-| Runtime Identifier | `osx-arm64` |
-| Single file | `PublishSingleFile=true` |
-| Self contained | `false` |
+| 配布物 | Target Framework | Runtime Identifier | Single file | Self contained |
+|--------|------------------|--------------------|-------------|----------------|
+| CLI | `net10.0` | `osx-arm64` | `PublishSingleFile=true` | `false` |
+| Desktop GUI | `net10.0` | `osx-arm64` | `false` | `false` |
 
-## 2. 展開先を決める
+## 2. CLI の展開先を決める
 
 展開先は任意です。次のような場所を想定しています。
 
@@ -52,7 +56,7 @@ tokilog-net10.0-osx-arm64.zip
 
 ```console
 mkdir -p ~/Applications/Tokilog
-unzip tokilog-net10.0-osx-arm64.zip -d /tmp/tokilog-osx-arm64
+unzip tokilog-cli-net10.0-osx-arm64.zip -d /tmp/tokilog-osx-arm64
 cp -R /tmp/tokilog-osx-arm64/osx-arm64/. ~/Applications/Tokilog/
 ```
 
@@ -60,11 +64,11 @@ cp -R /tmp/tokilog-osx-arm64/osx-arm64/. ~/Applications/Tokilog/
 
 ```console
 mkdir -p ~/.local/bin
-unzip tokilog-net10.0-osx-arm64.zip -d /tmp/tokilog-osx-arm64
+unzip tokilog-cli-net10.0-osx-arm64.zip -d /tmp/tokilog-osx-arm64
 cp /tmp/tokilog-osx-arm64/osx-arm64/tl ~/.local/bin/
 ```
 
-## 3. 実行権限を付与する
+## 3. CLI に実行権限を付与する
 
 展開した `tl` に実行権限がない場合は、`chmod +x` を実行します。
 
@@ -78,7 +82,7 @@ chmod +x ~/Applications/Tokilog/tl
 chmod +x ~/.local/bin/tl
 ```
 
-## 4. PATH に追加する
+## 4. CLI を PATH に追加する
 
 zsh では、`~/.zshrc` に Tokilog の展開先を追加します。
 
@@ -102,7 +106,7 @@ source ~/.zshrc
 tl --help
 ```
 
-## 5. 動作確認する
+## 5. CLI の動作確認をする
 
 まず `tl upgrade` を実行して、初回セットアップに必要な DB migration を適用します。その後、`tl doctor` で実行環境とローカル DB 状態を確認します。
 
@@ -123,6 +127,25 @@ tl today
 ```
 
 `tl start` で作業を開始し、`tl current` で実行中タイマーを確認します。作業が終わったら `tl stop` で停止し、`tl today` で今日の記録を確認します。未記録時間帯を確認したい場合は `tl today --gaps` を使います。
+
+## Desktop GUI を試す場合
+
+Desktop GUI を試す場合は、`tokilog-desktop-net10.0-osx-arm64.zip` を任意のフォルダーに展開し、展開先の `Tokilog.Desktop` を起動します。
+
+```console
+mkdir -p ~/Applications/TokilogDesktop
+unzip tokilog-desktop-net10.0-osx-arm64.zip -d /tmp/tokilog-desktop-osx-arm64
+cp -R /tmp/tokilog-desktop-osx-arm64/osx-arm64/. ~/Applications/TokilogDesktop/
+chmod +x ~/Applications/TokilogDesktop/Tokilog.Desktop
+```
+
+macOS Desktop GUI は experimental unsigned build です。Developer ID signing / notarization / stapling / dmg packaging は未対応です。そのため、macOS の Gatekeeper により初回起動がブロックされる可能性があります。
+
+信頼できる配布物であることを確認できる場合のみ、Finder で `Tokilog.Desktop` を Control-click → Open するか、System Settings の Privacy & Security から Open Anyway して起動してください。
+
+将来的に signing / notarization / dmg packaging を検討します。
+
+Desktop GUI も CLI と同じローカル SQLite DB を使います。初回セットアップや schema upgrade が必要な場合は、CLI で `tl upgrade` を実行してから Desktop GUI を起動してください。
 
 ## DB 保存場所
 
@@ -268,11 +291,7 @@ dotnet --list-runtimes
 chmod +x ~/Applications/Tokilog/tl
 ```
 
-macOS の Gatekeeper でブロックされた場合は、展開先の quarantine 属性を削除してから再実行してください。
-
-```console
-xattr -dr com.apple.quarantine ~/Applications/Tokilog
-```
+macOS Desktop GUI が Gatekeeper でブロックされた場合は、信頼できる配布物であることを確認できる場合のみ、Finder で Control-click → Open するか、System Settings の Privacy & Security から Open Anyway して起動してください。
 
 DB やログの状態を確認したい場合は、次のコマンドを使います。
 
