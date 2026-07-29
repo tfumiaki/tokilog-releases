@@ -6,14 +6,15 @@ Tokilog は、ローカル保存を前提にした軽量な時間記録 CLI ツ�
 
 ## Alpha Release
 
-Tokilog は現在 alpha 段階です。CLI (`tl`) を先行配布しており、Windows / macOS で手動導入して使うことを想定しています。
+Tokilog は現在 alpha 段階です。CLI (`tl`) と Desktop GUI を配布しており、Windows / macOS / Linux (Ubuntu) で手動導入して使うことを想定しています。
 
 現在の配布物:
 
-| Platform | Asset |
-|---|---|
-| Windows x64 | `tokilog-net10.0-win-x64.zip` |
-| macOS Apple Silicon | `tokilog-net10.0-osx-arm64.zip` |
+| Platform | CLI | Desktop GUI |
+|---|---|---|
+| Windows x64 | `tokilog-cli-net10.0-win-x64.zip` | `tokilog-desktop-net10.0-win-x64.zip` |
+| macOS Apple Silicon | `tokilog-cli-net10.0-osx-arm64.zip` | `tokilog-desktop-net10.0-osx-arm64.zip` |
+| Linux x64 (Ubuntu) | `tokilog-cli-net10.0-linux-x64.zip` | `tokilog-desktop-net10.0-linux-x64.zip` |
 
 配布物は [GitHub Releases](https://github.com/tfumiaki/tokilog-releases/releases) から取得します。
 
@@ -27,7 +28,7 @@ Tokilog は現在 alpha 段階です。CLI (`tl`) を先行配布しており、
 
 ## Runtime
 
-配布される `tl` / `tl.exe` は .NET 10 Runtime を必要とします。
+配布される CLI (`tl` / `tl.exe`) と Desktop GUI は .NET 10 Runtime を必要とします。
 
 ```console
 dotnet --list-runtimes
@@ -45,6 +46,7 @@ Tokilog は記録データをローカル SQLite DB に保存します。サー�
 |---|---|
 | Windows | `%LOCALAPPDATA%\Tokilog\tokilog.db` |
 | macOS | `~/Library/Application Support/Tokilog/tokilog.db` |
+| Linux | `~/.local/share/Tokilog/tokilog.db`（`$XDG_DATA_HOME` 設定時は `$XDG_DATA_HOME/Tokilog/tokilog.db`） |
 
 Tokilog 本体を削除しても DB ファイルは自動では削除されません。記録データを残したい場合は DB ファイルを削除しないでください。
 
@@ -53,6 +55,7 @@ Tokilog 本体を削除しても DB ファイルは自動では削除されま�
 - alpha release です。破壊的変更が入る可能性があります。
 - Windows は x64 向け zip のみを想定しています。
 - macOS は Apple Silicon (`osx-arm64`) 向け zip のみを想定しています。
+- Linux は x64 向け zip のみを想定しています（Ubuntu 22.04 / 24.04 で確認）。
 - MSI / MSIX、Homebrew、winget、Scoop、インストーラー、自動アップデートは未提供です。
 - macOS の notarization / code signing は未整備です。
 
