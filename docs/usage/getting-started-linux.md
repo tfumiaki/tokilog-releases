@@ -67,10 +67,15 @@ zip を任意のディレクトリに展開します。展開先は、あとで 
 
 zip を展開すると中に `linux-x64` ディレクトリが入っています。その中身を展開先へ移動します。
 
+**展開先と `~/tools/tokilog` は、上書きではなく作り直します。** `unzip` も `cp -R` も既存のディレクトリへマージするため、新しい版で消えたファイルが古いまま残ります。毎回消してから展開・複写します。**`rm -rf` は指定したディレクトリを中身ごと消すので、下の手順を実行する前に記録の保存先を確認してください。** 既定の保存先（`~/.local/share/Tokilog` 配下、`$XDG_DATA_HOME` を設定している場合はその配下）は `~/tools/tokilog` の外にあるため、既定のまま使っているなら消えるのは Tokilog 本体だけです。**`TOKILOG_DATA_DIR`・`TOKILOG_LOG_PATH`・`XDG_DATA_HOME` のいずれか が `~/tools/tokilog` またはその配下（あるいは展開先 `/tmp/tokilog-linux-x64` の配下）を指している場合は、DB・設定・export state・ログも一緒に消えます。** その場合は、記録を配布先の外へ移すか、設定を配布先の外のパスへ向け直すまで、下の手順を実行しないでください。
+
 ```bash
-mkdir -p ~/tools/tokilog
-unzip tokilog-cli-net10.0-linux-x64.zip -d /tmp/tokilog-linux-x64
-cp -R /tmp/tokilog-linux-x64/linux-x64/. ~/tools/tokilog/
+mkdir -p ~/tools \
+  && rm -rf /tmp/tokilog-linux-x64 \
+  && unzip tokilog-cli-net10.0-linux-x64.zip -d /tmp/tokilog-linux-x64 \
+  && test -f /tmp/tokilog-linux-x64/linux-x64/tl \
+  && rm -rf ~/tools/tokilog \
+  && cp -R /tmp/tokilog-linux-x64/linux-x64/. ~/tools/tokilog/
 ```
 
 これで `~/tools/tokilog/tl` に CLI が配置されます。
@@ -134,12 +139,17 @@ bash / zsh では `#` 以降がコメント扱いになるため、`@project` �
 
 `tokilog-desktop-net10.0-linux-x64.zip` を展開し、中の `linux-x64` ディレクトリの中身を配置して `Tokilog.Desktop` を起動します。
 
+**展開先と `~/tools/tokilog-desktop` は、上書きではなく作り直します。** `unzip` も `cp -R` も既存のディレクトリへマージするため、新しい版で消えたファイルが古いまま残ります。毎回消してから展開・複写します。**`rm -rf` は指定したディレクトリを中身ごと消すので、下の手順を実行する前に記録の保存先を確認してください。** 既定の保存先（`~/.local/share/Tokilog` 配下、`$XDG_DATA_HOME` を設定している場合はその配下）は `~/tools/tokilog-desktop` の外にあるため、既定のまま使っているなら消えるのは Tokilog 本体だけです。**`TOKILOG_DATA_DIR`・`TOKILOG_LOG_PATH`・`XDG_DATA_HOME` のいずれか が `~/tools/tokilog-desktop` またはその配下（あるいは展開先 `/tmp/tokilog-desktop-linux-x64` の配下）を指している場合は、DB・設定・export state・ログも一緒に消えます。** その場合は、記録を配布先の外へ移すか、設定を配布先の外のパスへ向け直すまで、下の手順を実行しないでください。
+
 ```bash
-mkdir -p ~/tools/tokilog-desktop
-unzip tokilog-desktop-net10.0-linux-x64.zip -d /tmp/tokilog-desktop-linux-x64
-cp -R /tmp/tokilog-desktop-linux-x64/linux-x64/. ~/tools/tokilog-desktop/
-chmod +x ~/tools/tokilog-desktop/Tokilog.Desktop
-~/tools/tokilog-desktop/Tokilog.Desktop
+mkdir -p ~/tools \
+  && rm -rf /tmp/tokilog-desktop-linux-x64 \
+  && unzip tokilog-desktop-net10.0-linux-x64.zip -d /tmp/tokilog-desktop-linux-x64 \
+  && test -f /tmp/tokilog-desktop-linux-x64/linux-x64/Tokilog.Desktop \
+  && rm -rf ~/tools/tokilog-desktop \
+  && cp -R /tmp/tokilog-desktop-linux-x64/linux-x64/. ~/tools/tokilog-desktop/ \
+  && chmod +x ~/tools/tokilog-desktop/Tokilog.Desktop \
+  && ~/tools/tokilog-desktop/Tokilog.Desktop
 ```
 
 GUI の起動には上記「Desktop GUI に必要な OS パッケージ」が必要です。
@@ -162,10 +172,14 @@ Linux のデフォルト DB 保存場所（XDG 準拠）:
 
 環境変数 `TOKILOG_DATA_DIR` にデータディレクトリの絶対パスを指定すると、データディレクトリを上書きできます。DB ファイル名は `tokilog.db` で固定です。`TOKILOG_DATA_DIR` にはディレクトリパスを指定し、`tokilog.db` まで含めてはいけません。
 
+**`TOKILOG_LOG_PATH` も一緒に指定してください。** ログの保存場所は `TOKILOG_DATA_DIR` に従わないため、これを省くと、テスト用の領域を指定したつもりでもエラーログだけが普段の場所に出ます。
+
 ```bash
 export TOKILOG_DATA_DIR="$HOME/.local/share/Tokilog"
+export TOKILOG_LOG_PATH="$HOME/.local/share/Tokilog/tokilog.log"
 tl today
 # → DB ファイル: ~/.local/share/Tokilog/tokilog.db
+# → ログファイル: ~/.local/share/Tokilog/tokilog.log
 ```
 
 ## ログ保存場所と --debug

@@ -485,15 +485,17 @@ Tokilog CLI はローカル SQLite DB に記録データを保存します。
 
 開発・テスト用途では、環境変数 `TOKILOG_DATA_DIR` にデータディレクトリの絶対パスを指定するとデータディレクトリを上書きできます。DB ファイル名は `tokilog.db` で固定です。`TOKILOG_DATA_DIR` にはディレクトリパスを指定します。`tokilog.db` まで含めてはいけません。
 
+**`TOKILOG_LOG_PATH` も一緒に指定してください。** `TOKILOG_DATA_DIR` だけを向けても**ログは付いてきません**。エラーが起きたときの `tokilog.log` は、**`TOKILOG_DATA_DIR` とは無関係に決まる OS 既定のアプリケーションデータ配下**（Windows は `%LOCALAPPDATA%\Tokilog`、macOS は `~/Library/Application Support/Tokilog`、Linux は `$XDG_DATA_HOME/Tokilog`、`XDG_DATA_HOME` が未設定または空白なら `~/.local/share/Tokilog`）に書かれます。**普段 `TOKILOG_DATA_DIR` を設定して使っている場合でも、そちらには出ません。****どちらも同じ専用ディレクトリの下**（普段のデータディレクトリではない場所）を、絶対パスで指すようにしてください。
+
 ```console
-TOKILOG_DATA_DIR=/tmp/tokilog-test tl today
+TOKILOG_DATA_DIR=/tmp/tokilog-test TOKILOG_LOG_PATH=/tmp/tokilog-test/tokilog.log tl today
 ```
 
 通常利用中に `TOKILOG_DATA_DIR` を変えると別のデータディレクトリに切り替わります。
 
 ### ログ保存場所
 
-ログは DB と同じ Tokilog アプリデータディレクトリ配下に保存されます。
+ログは **OS 既定の** Tokilog アプリデータディレクトリ配下に保存されます。**この場所は `TOKILOG_DATA_DIR` の影響を受けません** —— `TOKILOG_DATA_DIR` で DB を移しても、ログは下表の場所に出ます。移したい場合は `TOKILOG_LOG_PATH` を指定してください。
 
 | OS | 既定ログパス |
 |----|--------------|

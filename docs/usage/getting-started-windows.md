@@ -173,10 +173,14 @@ DB ファイルは Tokilog 本体とは別に保存されます。zip の展開�
 
 環境変数 `TOKILOG_DATA_DIR` にデータディレクトリの絶対パスを指定すると、データディレクトリを上書きできます。DB ファイル名は `tokilog.db` で固定です。`TOKILOG_DATA_DIR` にはディレクトリパスを指定します。`tokilog.db` まで含めてはいけません。通常利用ではデフォルト保存場所のまま使うことを想定しています。
 
+**`TOKILOG_LOG_PATH` も一緒に指定してください。** ログの保存場所は `TOKILOG_DATA_DIR` に従わないため、これを省くと、テスト用の領域を指定したつもりでもエラーログだけが普段の場所に出ます。
+
 ```powershell
 $env:TOKILOG_DATA_DIR = "C:\Users\me\AppData\Local\Tokilog"
+$env:TOKILOG_LOG_PATH = "C:\Users\me\AppData\Local\Tokilog\tokilog.log"
 tl today
 # → DB ファイル: C:\Users\me\AppData\Local\Tokilog\tokilog.db
+# → ログファイル: C:\Users\me\AppData\Local\Tokilog\tokilog.log
 ```
 
 `TOKILOG_DATA_PATH` は採用していません（ファイルパスではなくディレクトリであることを明確にするため、`_DIR` を使用しています）。
