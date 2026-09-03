@@ -54,10 +54,15 @@ CLI を使う場合は `tokilog-cli-net10.0-osx-arm64.zip`、Desktop GUI を試�
 
 `~/Applications/Tokilog` に展開する例:
 
+**展開先と `~/Applications/Tokilog` は、上書きではなく作り直します。** `unzip` も `cp -R` も既存のディレクトリへマージするため、新しい版で消えたファイルが古いまま残ります。毎回消してから展開・複写します。**`rm -rf` は指定したディレクトリを中身ごと消すので、下の手順を実行する前に記録の保存先を確認してください。** 既定の保存先（`~/Library/Application Support/Tokilog` 配下）は `~/Applications/Tokilog` の外にあるため、既定のまま使っているなら消えるのは Tokilog 本体だけです。**`TOKILOG_DATA_DIR` または `TOKILOG_LOG_PATH` が `~/Applications/Tokilog` またはその配下（あるいは展開先 `/tmp/tokilog-osx-arm64` の配下）を指している場合は、DB・設定・export state・ログも一緒に消えます。** その場合は、記録を配布先の外へ移すか、設定を配布先の外のパスへ向け直すまで、下の手順を実行しないでください。
+
 ```console
-mkdir -p ~/Applications/Tokilog
-unzip tokilog-cli-net10.0-osx-arm64.zip -d /tmp/tokilog-osx-arm64
-cp -R /tmp/tokilog-osx-arm64/osx-arm64/. ~/Applications/Tokilog/
+mkdir -p ~/Applications \
+  && rm -rf /tmp/tokilog-osx-arm64 \
+  && unzip tokilog-cli-net10.0-osx-arm64.zip -d /tmp/tokilog-osx-arm64 \
+  && test -f /tmp/tokilog-osx-arm64/osx-arm64/tl \
+  && rm -rf ~/Applications/Tokilog \
+  && cp -R /tmp/tokilog-osx-arm64/osx-arm64/. ~/Applications/Tokilog/
 ```
 
 `~/.local/bin` に `tl` を置く例:
@@ -130,18 +135,25 @@ tl today
 
 ## Desktop GUI を試す場合
 
-Desktop GUI を試す場合は、`tokilog-desktop-net10.0-osx-arm64.zip` を任意のフォルダーに展開し、展開先の `Tokilog.Desktop` を起動します。
+Desktop GUI を試す場合は、`tokilog-desktop-net10.0-osx-arm64.zip` を展開し、中に入っている `Tokilog.app` を任意のフォルダーへ移して起動します。
 
 ```console
-mkdir -p ~/Applications/TokilogDesktop
+mkdir -p ~/Applications
+rm -rf /tmp/tokilog-desktop-osx-arm64
 unzip tokilog-desktop-net10.0-osx-arm64.zip -d /tmp/tokilog-desktop-osx-arm64
-cp -R /tmp/tokilog-desktop-osx-arm64/osx-arm64/. ~/Applications/TokilogDesktop/
-chmod +x ~/Applications/TokilogDesktop/Tokilog.Desktop
+rm -rf ~/Applications/Tokilog.app
+cp -R /tmp/tokilog-desktop-osx-arm64/osx-arm64/Tokilog.app ~/Applications/
 ```
+
+`chmod +x` は必要ありません。実行権限は zip に記録されています。
+
+**展開先と `Tokilog.app` は、上書きではなく作り直します。** `unzip` も `cp -R` も既存のディレクトリへマージするため、新しい版で消えたファイルが古いまま残ります。残ったファイルはバンドルの中から読み込まれうるので、毎回消してから展開・複写します。**消えるのはアプリ本体だけです** —— 記録した時間や設定は `~/Library/Application Support` 配下（または `TOKILOG_DATA_DIR` の指す先）にあり、`Tokilog.app` の中にはありません。
+
+以前の zip は平置きのファイル群で、`Tokilog.Desktop` を直接起動する形でした。**asset 名は同じままで中身が変わっています。**
 
 macOS Desktop GUI は experimental unsigned build です。Developer ID signing / notarization / stapling / dmg packaging は未対応です。そのため、macOS の Gatekeeper により初回起動がブロックされる可能性があります。
 
-信頼できる配布物であることを確認できる場合のみ、Finder で `Tokilog.Desktop` を Control-click → Open するか、System Settings の Privacy & Security から Open Anyway して起動してください。
+信頼できる配布物であることを確認できる場合のみ、Finder で `Tokilog.app` を Control-click → Open するか、System Settings の Privacy & Security から Open Anyway して起動してください。
 
 将来的に signing / notarization / dmg packaging を検討します。
 
@@ -163,10 +175,14 @@ Tokilog 本体を削除しても、この DB ファイルは自動では削除�
 
 環境変数 `TOKILOG_DATA_DIR` にデータディレクトリの絶対パスを指定するとデータディレクトリを上書きできます。DB ファイル名は `tokilog.db` で固定です。`TOKILOG_DATA_DIR` にはディレクトリパスを指定します。`tokilog.db` まで含めてはいけません。通常利用では既定保存場所のまま使うことを想定しています。
 
+**`TOKILOG_LOG_PATH` も一緒に指定してください。** ログの保存場所は `TOKILOG_DATA_DIR` に従わないため、これを省くと、テスト用の領域を指定したつもりでもエラーログだけが普段の場所に出ます。
+
 ```console
 export TOKILOG_DATA_DIR="$HOME/Library/Application Support/Tokilog"
+export TOKILOG_LOG_PATH="$HOME/Library/Application Support/Tokilog/tokilog.log"
 tl today
 # → DB ファイル: ~/Library/Application Support/Tokilog/tokilog.db
+# → ログファイル: ~/Library/Application Support/Tokilog/tokilog.log
 ```
 
 `TOKILOG_DATA_PATH` は採用していません（ファイルパスではなくディレクトリであることを明確にするため、`_DIR` を使用しています）。
@@ -188,7 +204,7 @@ export TOKILOG_DATA_DIR="$HOME/Library/Application Support/Tokilog"
 
 ## ログ保存場所
 
-ログは DB と同じ Tokilog アプリデータディレクトリ配下に保存されます。
+ログは **OS 既定の** Tokilog アプリデータディレクトリ配下に保存されます。**この場所は `TOKILOG_DATA_DIR` の影響を受けません** —— `TOKILOG_DATA_DIR` で DB を移しても、ログは下記の場所に出ます。移したい場合は `TOKILOG_LOG_PATH` を指定してください。
 
 macOS の既定ログ保存場所:
 
