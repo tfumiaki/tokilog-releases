@@ -67,7 +67,7 @@ zip を任意のディレクトリに展開します。展開先は、あとで 
 
 zip を展開すると中に `linux-x64` ディレクトリが入っています。その中身を展開先へ移動します。
 
-**展開先と `~/tools/tokilog` は、上書きではなく作り直します。** `unzip` も `cp -R` も既存のディレクトリへマージするため、新しい版で消えたファイルが古いまま残ります。毎回消してから展開・複写します。**`rm -rf` は指定したディレクトリを中身ごと消すので、下の手順を実行する前に記録の保存先を確認してください。** 既定の保存先（`~/.local/share/Tokilog` 配下、`$XDG_DATA_HOME` を設定している場合はその配下）は `~/tools/tokilog` の外にあるため、既定のまま使っているなら消えるのは Tokilog 本体だけです。**`TOKILOG_DATA_DIR`・`TOKILOG_LOG_PATH`・`XDG_DATA_HOME` のいずれか が `~/tools/tokilog` またはその配下（あるいは展開先 `/tmp/tokilog-linux-x64` の配下）を指している場合は、DB・設定・export state・ログも一緒に消えます。** その場合は、記録を配布先の外へ移すか、設定を配布先の外のパスへ向け直すまで、下の手順を実行しないでください。
+**展開先と `~/tools/tokilog` は、上書きではなく作り直します。** `unzip` も `cp -R` も既存のディレクトリへマージするため、新しい版で消えたファイルが古いまま残ります。毎回消してから展開・複写します。**`rm -rf` は指定したディレクトリを中身ごと消すので、下の手順を実行する前に記録の保存先を確認してください。** 既定の保存先（`~/.local/share/Tokilog` 配下、`$XDG_DATA_HOME` を**有効な絶対パスとして**設定している場合はその配下）は `~/tools/tokilog` の外にあるため、既定のまま使っているなら消えるのは Tokilog 本体だけです。**`TOKILOG_DATA_DIR`・`TOKILOG_LOG_PATH`・`XDG_DATA_HOME` のいずれか が `~/tools/tokilog` またはその配下（あるいは展開先 `/tmp/tokilog-linux-x64` の配下）を指している場合は、DB・設定・export state・ログも一緒に消えます。** その場合は、記録を配布先の外へ移すか、設定を配布先の外のパスへ向け直すまで、下の手順を実行しないでください。
 
 ```bash
 mkdir -p ~/tools \
@@ -139,7 +139,7 @@ bash / zsh では `#` 以降がコメント扱いになるため、`@project` �
 
 `tokilog-desktop-net10.0-linux-x64.zip` を展開し、中の `linux-x64` ディレクトリの中身を配置して `Tokilog.Desktop` を起動します。
 
-**展開先と `~/tools/tokilog-desktop` は、上書きではなく作り直します。** `unzip` も `cp -R` も既存のディレクトリへマージするため、新しい版で消えたファイルが古いまま残ります。毎回消してから展開・複写します。**`rm -rf` は指定したディレクトリを中身ごと消すので、下の手順を実行する前に記録の保存先を確認してください。** 既定の保存先（`~/.local/share/Tokilog` 配下、`$XDG_DATA_HOME` を設定している場合はその配下）は `~/tools/tokilog-desktop` の外にあるため、既定のまま使っているなら消えるのは Tokilog 本体だけです。**`TOKILOG_DATA_DIR`・`TOKILOG_LOG_PATH`・`XDG_DATA_HOME` のいずれか が `~/tools/tokilog-desktop` またはその配下（あるいは展開先 `/tmp/tokilog-desktop-linux-x64` の配下）を指している場合は、DB・設定・export state・ログも一緒に消えます。** その場合は、記録を配布先の外へ移すか、設定を配布先の外のパスへ向け直すまで、下の手順を実行しないでください。
+**展開先と `~/tools/tokilog-desktop` は、上書きではなく作り直します。** `unzip` も `cp -R` も既存のディレクトリへマージするため、新しい版で消えたファイルが古いまま残ります。毎回消してから展開・複写します。**`rm -rf` は指定したディレクトリを中身ごと消すので、下の手順を実行する前に記録の保存先を確認してください。** 既定の保存先（`~/.local/share/Tokilog` 配下、`$XDG_DATA_HOME` を**有効な絶対パスとして**設定している場合はその配下）は `~/tools/tokilog-desktop` の外にあるため、既定のまま使っているなら消えるのは Tokilog 本体だけです。**`TOKILOG_DATA_DIR`・`TOKILOG_LOG_PATH`・`XDG_DATA_HOME` のいずれか が `~/tools/tokilog-desktop` またはその配下（あるいは展開先 `/tmp/tokilog-desktop-linux-x64` の配下）を指している場合は、DB・設定・export state・ログも一緒に消えます。** その場合は、記録を配布先の外へ移すか、設定を配布先の外のパスへ向け直すまで、下の手順を実行しないでください。
 
 ```bash
 mkdir -p ~/tools \
@@ -166,7 +166,7 @@ Linux のデフォルト DB 保存場所（XDG 準拠）:
 ~/.local/share/Tokilog/tokilog.db
 ```
 
-`$XDG_DATA_HOME` を設定している場合は `$XDG_DATA_HOME/Tokilog/tokilog.db` になります。DB ファイルは Tokilog 本体とは別に保存され、展開先を削除しても記録データは自動では削除されません。
+`$XDG_DATA_HOME` を**有効な絶対パスとして**設定している場合は `$XDG_DATA_HOME/Tokilog/tokilog.db` になります（空文字や相対パスのときは使われず `~/.local/share/Tokilog/tokilog.db` になります。実行環境がホームディレクトリなどの基点を解決できない場合、この保存先は保証されないので、`TOKILOG_DATA_DIR` で保存先を明示してください）。DB ファイルは Tokilog 本体とは別に保存され、展開先を削除しても記録データは自動では削除されません。
 
 ### データディレクトリの上書き（開発・テスト用）
 
@@ -175,6 +175,7 @@ Linux のデフォルト DB 保存場所（XDG 準拠）:
 **`TOKILOG_LOG_PATH` も一緒に指定してください。** ログの保存場所は `TOKILOG_DATA_DIR` に従わないため、これを省くと、テスト用の領域を指定したつもりでもエラーログだけが普段の場所に出ます。
 
 ```bash
+# これは「明示指定」の例です。書いたパスがそのまま使われ、$XDG_DATA_HOME は参照されません。
 export TOKILOG_DATA_DIR="$HOME/.local/share/Tokilog"
 export TOKILOG_LOG_PATH="$HOME/.local/share/Tokilog/tokilog.log"
 tl today
@@ -184,11 +185,13 @@ tl today
 
 ## ログ保存場所と --debug
 
-原因調査が必要な実行時エラーはログファイルに記録されます。Linux のデフォルトログ保存場所:
+原因調査が必要な実行時エラーはログファイルに記録されます。Linux のデフォルトログ保存場所（XDG 準拠）:
 
 ```text
 ~/.local/share/Tokilog/tokilog.log
 ```
+
+`$XDG_DATA_HOME` を**有効な絶対パスとして**設定している場合は `$XDG_DATA_HOME/Tokilog/tokilog.log` になります（空文字や相対パスのときは使われず `~/.local/share/Tokilog/tokilog.log` になります。実行環境がホームディレクトリなどの基点を解決できない場合、この保存先は保証されないので、`TOKILOG_LOG_PATH` でログの保存先を明示してください）。
 
 ログファイルの場所を変更したい場合は、環境変数 `TOKILOG_LOG_PATH` に絶対パスを指定します。詳細な例外情報を画面にも表示したい場合は `--debug` を指定します。
 
@@ -217,6 +220,8 @@ Tokilog は展開先に置いた実行ファイルを PATH から呼び出す構
 ~/.local/share/Tokilog/tokilog.db
 ~/.local/share/Tokilog/tokilog.log
 ```
+
+`$XDG_DATA_HOME` を**有効な絶対パスとして**設定している場合は `$XDG_DATA_HOME/Tokilog/` 配下です（空文字や相対パスのときは使われず `~/.local/share/Tokilog/` 配下になります。実行環境がホームディレクトリなどの基点を解決できない場合、この保存先は保証されません）。`TOKILOG_DATA_DIR` / `TOKILOG_LOG_PATH` を設定して使っていた場合は、そちらのパスを見てください。
 
 DB と log は Tokilog 本体とは別です。本体を削除しても自動では削除されません。
 
