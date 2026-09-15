@@ -1,82 +1,242 @@
 Tokilog Third-Party Notices
 
 This file lists third-party components used by Tokilog alpha binary
-distributions. Third-party components are licensed by their respective
-copyright holders. Tokilog's Alpha Evaluation License does not replace or
-modify these third-party licenses.
+distributions: the CLI assets (`tokilog-cli-net10.0-*.zip`) and the Desktop
+GUI assets (`tokilog-desktop-net10.0-*.zip`). Third-party components are
+licensed by their respective copyright holders. Tokilog's Alpha Evaluation
+License does not replace or modify these third-party licenses.
 
-Tokilog alpha binaries are framework-dependent .NET applications. The
-.NET Runtime itself is not redistributed in the Tokilog zip assets; users
-install the .NET Runtime separately.
+Tokilog alpha binaries are framework-dependent .NET applications (published
+with `--self-contained false`). The .NET Runtime itself is not redistributed
+in the Tokilog zip assets; users install the .NET Runtime separately.
 
-Runtime and publish-related NuGet dependencies identified from the Tokilog CLI project:
+Components marked [CLI] are used by the CLI assets, [Desktop] by the Desktop
+GUI assets, and [CLI, Desktop] by both. Platform-specific native asset
+packages are included only in the assets for the matching platform.
+
+
+License texts included with the binaries
+----------------------------------------
+
+The following files are included in the release assets next to the
+application (in the macOS Desktop asset, inside `Tokilog.app/Contents/MacOS/`):
+
+- `NOTICE` — this file [CLI, Desktop]
+- `licenses/MIT.txt` — MIT License, for the MIT-licensed components below
+  [CLI, Desktop]
+- `licenses/Apache-2.0.txt` — Apache License 2.0, for the SQLitePCLRaw
+  packages [CLI, Desktop]
+- `licenses/ANGLE-LICENSE.txt` — the ANGLE license [Desktop]
+- `licenses/Inter-OFL.txt` — SIL Open Font License 1.1, for Inter [Desktop]
+- `licenses/NotoSansJP-OFL.txt` — SIL Open Font License 1.1, for Noto Sans JP
+  [Desktop]
+- `licenses/SkiaSharp-HarfBuzzSharp-THIRD-PARTY-NOTICES.txt` — third-party
+  notices for the native libraries in SkiaSharp and HarfBuzzSharp [Desktop]
+- `licenses/FontAwesome-Free.txt` — Font Awesome Free attribution [Desktop]
+
 
 Microsoft packages
 ------------------
 
-The following packages are published by Microsoft and use the MIT License:
+The following packages are published by Microsoft and use the MIT License.
 
-- Microsoft.Data.Sqlite.Core 10.0.7
-- Microsoft.EntityFrameworkCore 10.0.7
-- Microsoft.EntityFrameworkCore.Abstractions 10.0.7
-- Microsoft.EntityFrameworkCore.Analyzers 10.0.7
-- Microsoft.EntityFrameworkCore.Relational 10.0.7
-- Microsoft.EntityFrameworkCore.Sqlite 10.0.7
-- Microsoft.EntityFrameworkCore.Sqlite.Core 10.0.7
-- Microsoft.Extensions.Caching.Abstractions 10.0.7
-- Microsoft.Extensions.Caching.Memory 10.0.7
-- Microsoft.Extensions.Configuration.Abstractions 10.0.7
-- Microsoft.Extensions.DependencyInjection 10.0.7
-- Microsoft.Extensions.DependencyInjection.Abstractions 10.0.7
-- Microsoft.Extensions.DependencyModel 10.0.7
-- Microsoft.Extensions.Logging 10.0.7
-- Microsoft.Extensions.Logging.Abstractions 10.0.7
-- Microsoft.Extensions.Options 10.0.7
-- Microsoft.Extensions.Primitives 10.0.7
+[CLI, Desktop]
+- Microsoft.Data.Sqlite.Core 10.0.9
+- Microsoft.EntityFrameworkCore 10.0.9
+- Microsoft.EntityFrameworkCore.Abstractions 10.0.9
+- Microsoft.EntityFrameworkCore.Analyzers 10.0.9
+- Microsoft.EntityFrameworkCore.Relational 10.0.9
+- Microsoft.EntityFrameworkCore.Sqlite 10.0.9
+- Microsoft.EntityFrameworkCore.Sqlite.Core 10.0.9
+- Microsoft.Extensions.Caching.Abstractions 10.0.9
+- Microsoft.Extensions.Caching.Memory 10.0.9
+- Microsoft.Extensions.Configuration.Abstractions 10.0.9
+- Microsoft.Extensions.DependencyInjection 10.0.9
+- Microsoft.Extensions.DependencyInjection.Abstractions 10.0.9
+- Microsoft.Extensions.DependencyModel 10.0.9
+- Microsoft.Extensions.Logging 10.0.9
+- Microsoft.Extensions.Logging.Abstractions 10.0.9
+- Microsoft.Extensions.Options 10.0.9
+- Microsoft.Extensions.Primitives 10.0.9
+- System.Security.Cryptography.Pkcs 10.0.10
+- System.Security.Cryptography.Xml 10.0.10
+
+[CLI]
 - System.CommandLine 2.0.0-beta5.25306.1
-- System.Security.Cryptography.Pkcs 10.0.6
-- System.Security.Cryptography.Xml 10.0.6
+
+[Desktop]
+- SkiaSharp 2.88.9
+- SkiaSharp.NativeAssets.Linux 2.88.9
+- SkiaSharp.NativeAssets.macOS 2.88.9
+- SkiaSharp.NativeAssets.WebAssembly 2.88.9
+- SkiaSharp.NativeAssets.Win32 2.88.9
+- HarfBuzzSharp 7.3.0.3
+- HarfBuzzSharp.NativeAssets.Linux 7.3.0.3
+- HarfBuzzSharp.NativeAssets.macOS 7.3.0.3
+- HarfBuzzSharp.NativeAssets.WebAssembly 7.3.0.3
+- HarfBuzzSharp.NativeAssets.Win32 7.3.0.3
 
 Copyright notice from the NuGet package metadata:
 
-Copyright (c) Microsoft Corporation. All rights reserved.
+© Microsoft Corporation. All rights reserved.
 
-License:
-
-MIT License
-https://licenses.nuget.org/MIT
+License: MIT License (https://licenses.nuget.org/MIT)
 
 Source and project references include:
 
 - https://github.com/dotnet/dotnet
 - https://github.com/dotnet/command-line-api
-- https://docs.microsoft.com/ef/core/
-- https://docs.microsoft.com/dotnet/standard/data/sqlite/
-- https://dot.net/
+- https://github.com/mono/SkiaSharp
+
+The native libraries in the SkiaSharp and HarfBuzzSharp packages incorporate
+third-party material (ANGLE, HarfBuzz, Skia, FreeType, ICU, libpng, zlib and
+others). Its notices are included as
+`licenses/SkiaSharp-HarfBuzzSharp-THIRD-PARTY-NOTICES.txt`.
+
+
+Avalonia packages
+-----------------
+
+The following packages are published by the Avalonia Team and use the MIT
+License.
+
+[Desktop]
+- Avalonia 11.2.8
+- Avalonia.Desktop 11.2.8
+- Avalonia.Fonts.Inter 11.2.8
+- Avalonia.FreeDesktop 11.2.8
+- Avalonia.Native 11.2.8
+- Avalonia.Remote.Protocol 11.2.8
+- Avalonia.Skia 11.2.8
+- Avalonia.Themes.Fluent 11.2.8
+- Avalonia.Win32 11.2.8
+- Avalonia.X11 11.2.8
+- Avalonia.BuildServices 0.0.31
+
+Copyright notice from the NuGet package metadata:
+
+Copyright 2013-2025 © The AvaloniaUI Project
+
+License: MIT License (https://licenses.nuget.org/MIT)
+
+Source repository: https://github.com/AvaloniaUI/Avalonia
+
+
+ANGLE (Avalonia.Angle.Windows.Natives)
+--------------------------------------
+
+[Desktop, Windows]
+- Avalonia.Angle.Windows.Natives 2.1.22045.20230930
+
+This package redistributes ANGLE. Its license text, as included in the
+package, is reproduced below.
+
+  Copyright 2018 The ANGLE Project Authors.
+  All rights reserved.
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+      Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+
+      Redistributions in binary form must reproduce the above
+      copyright notice, this list of conditions and the following
+      disclaimer in the documentation and/or other materials provided
+      with the distribution.
+
+      Neither the name of TransGaming Inc., Google Inc., 3DLabs Inc.
+      Ltd., nor the names of their contributors may be used to endorse
+      or promote products derived from this software without specific
+      prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+  FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+  COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+  LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+  ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  POSSIBILITY OF SUCH DAMAGE.
+
 
 SQLitePCLRaw packages
 ---------------------
 
-The following packages are published by Eric Sink / SourceGear and use
-the Apache License 2.0:
+The following packages are published by Eric Sink / SourceGear and use the
+Apache License 2.0.
 
-- SQLitePCLRaw.bundle_e_sqlite3 2.1.11
-- SQLitePCLRaw.core 2.1.11
-- SQLitePCLRaw.lib.e_sqlite3 2.1.11
-- SQLitePCLRaw.provider.e_sqlite3 2.1.11
+[CLI, Desktop]
+- SQLitePCLRaw.bundle_e_sqlite3 3.0.3
+- SQLitePCLRaw.config.e_sqlite3 3.0.3
+- SQLitePCLRaw.core 3.0.3
+- SQLitePCLRaw.provider.e_sqlite3 3.0.3
 
 Copyright notice from the NuGet package metadata:
 
-Copyright 2014-2024 SourceGear, LLC
+Copyright 2014-2026 SourceGear, LLC
 
-License:
+License: Apache License 2.0 (https://licenses.nuget.org/Apache-2.0)
 
-Apache License 2.0
-https://licenses.nuget.org/Apache-2.0
+Source repository: https://github.com/ericsink/SQLitePCL.raw
 
-Source repository:
 
-https://github.com/ericsink/SQLitePCL.raw
+SQLite (SourceGear.sqlite3)
+---------------------------
+
+[CLI, Desktop]
+- SourceGear.sqlite3 3.50.4.5
+
+This package redistributes the SQLite library. As stated in the license file
+included in the package, SQLite is in the public domain
+(https://sqlite.org/copyright.html). Package metadata: Copyright 2014-2025
+SourceGear, LLC.
+
+
+Other packages
+--------------
+
+[Desktop]
+- MicroCom.Runtime 0.11.0
+  Copyright 2021 © Nikita Tsukanov
+  License: MIT License (https://licenses.nuget.org/MIT)
+
+- Tmds.DBus.Protocol 0.21.3
+  Copyright Tom Deseyn
+  License: MIT License (https://licenses.nuget.org/MIT)
+
+- Projektanker.Icons.Avalonia 9.6.2
+- Projektanker.Icons.Avalonia.FontAwesome 9.6.2
+  Author (from the NuGet package metadata): Sebastian Rumohr
+  License: MIT License (https://licenses.nuget.org/MIT)
+  Source repository: https://github.com/Projektanker/Icons.Avalonia
+
+
+Fonts and icon data
+-------------------
+
+[Desktop]
+- Inter 3.019 (embedded in Avalonia.Fonts.Inter)
+  Copyright 2020 The Inter Project Authors (https://github.com/rsms/inter)
+  License: SIL Open Font License, Version 1.1
+
+- Noto Sans JP (bundled with the Desktop GUI; the license text is included
+  in the Desktop assets as `licenses/NotoSansJP-OFL.txt`)
+  Copyright 2014-2021 Adobe (http://www.adobe.com/), with Reserved Font Name
+  'Source'
+  License: SIL Open Font License, Version 1.1
+
+- Font Awesome 6 Free icon data (embedded in
+  Projektanker.Icons.Avalonia.FontAwesome)
+  Font Awesome by Fonticons, Inc. (https://fontawesome.com)
+  License: Font Awesome Free License (https://fontawesome.com/license/free);
+  the icons are licensed under CC BY 4.0
+
 
 License text references
 -----------------------
@@ -87,13 +247,26 @@ https://licenses.nuget.org/MIT
 Apache License 2.0:
 https://licenses.nuget.org/Apache-2.0
 
+SIL Open Font License, Version 1.1:
+https://openfontlicense.org/
+
+Creative Commons Attribution 4.0 International (CC BY 4.0):
+https://creativecommons.org/licenses/by/4.0/
+
+
 Dependency review note
 ----------------------
 
 This NOTICE was prepared from:
 
-- `dotnet list src/Tokilog.Cli/Tokilog.Cli.csproj package --include-transitive --no-restore`
-- NuGet package metadata restored locally for the listed runtime packages
+- `dotnet list src/Tokilog.Cli/Tokilog.Cli.csproj package --include-transitive`
+- `dotnet list src/Tokilog.Desktop/Tokilog.Desktop.csproj package --include-transitive`
+- the license and copyright fields of the restored NuGet package metadata,
+  and the license files included in the restored packages
+- the name table of the fonts embedded in Avalonia.Fonts.Inter
+- the THIRD-PARTY-NOTICES.txt included in the SkiaSharp and HarfBuzzSharp
+  packages (identical in all of them)
 
-Test-only packages are not listed because they are not part of the
-Tokilog alpha binary distribution.
+Test-only packages are not listed because they are not part of the Tokilog
+alpha binary distribution. Tokilog's own application icon and artwork are
+not third-party components and are not listed here.

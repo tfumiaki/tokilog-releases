@@ -178,6 +178,38 @@ tl day 2026-05-01 --summary
 
 `tl day <YYYY-MM-DD>` は指定日のエントリを表示します。`--gaps` を付けると、指定日の未記録時間帯を表示します。`--summary` を付けると、指定日の完了済みエントリを project / tag / detail 単位で集計します。
 
+### 過去の記録を検索する
+
+```console
+tl search 会議
+tl search 会議 "@ProjectX" --from 2026-07-01 --to 2026-08-31
+tl search "#urgent" "#review" --limit 100
+```
+
+`tl search` は、日付をまたいで記録を探します。条件には `tl start` / `tl add` と同じ書き方を使います。
+
+| 条件 | 意味 |
+|------|------|
+| detail の語 | detail の**部分一致**。ASCII の英字（A〜Z）だけは大文字・小文字を区別しません（`é` と `É` のような ASCII 以外の文字は区別します） |
+| `@project` | project 名の完全一致。1 つだけ指定できます |
+| `#tag` | tag 名の一致（tag は小文字で保存されるので、大文字・小文字は区別しません）。複数指定すると、**すべての tag が付いている**記録だけが残ります |
+| `--from <date>` / `--to <date>` | 対象期間（**開始日の**ローカル日付で判定し、両端を含みます）。`tl start` などと違い、時刻ではなく**日付**を指定します |
+| `--limit <n>` | 表示する最大件数。既定は 50、指定できるのは 1〜500 です |
+
+- 条件を 1 つも指定しないとエラーになります（`--limit` だけでは条件になりません）
+- 新しい記録が上に並びます。各行に日付が付きます
+- 完了済みの記録と実行中の記録の両方が対象です。削除した記録は対象外です
+- 件数が `--limit` を超えた場合は、先頭の件数だけを表示し「さらに結果あり」と表示します
+- 該当が無いときは `該当するエントリはありません` と表示します（エラーにはなりません）
+
+```text
+$ tl search 会議 "@ProjectX" --from 2026-07-01 --to 2026-08-31
+[a1b2c3d4] 2026-08-03 09:00 - 10:30 (1h30m) [completed] 定例会議 @ProjectX #urgent
+[b2c3d4e5] 2026-07-28 13:00 - 14:00 (1h00m) [completed] 会議準備 @ProjectX
+
+2 件
+```
+
 ## 記録を編集・削除する
 
 ### ID で編集する
@@ -501,7 +533,7 @@ TOKILOG_DATA_DIR=/tmp/tokilog-test TOKILOG_LOG_PATH=/tmp/tokilog-test/tokilog.lo
 |----|--------------|
 | Windows | `%LOCALAPPDATA%\Tokilog\tokilog.log` |
 | macOS | `~/Library/Application Support/Tokilog/tokilog.log` |
-| Linux | `~/.local/share/Tokilog/tokilog.log` |
+| Linux | `~/.local/share/Tokilog/tokilog.log`（`$XDG_DATA_HOME` を**有効な絶対パスとして**設定している場合は `$XDG_DATA_HOME/Tokilog/tokilog.log`）|
 
 環境変数 `TOKILOG_LOG_PATH` に絶対パスを指定すると、ログファイルパスを上書きできます。
 
