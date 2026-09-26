@@ -1,5 +1,5 @@
 Tokilog Alpha Evaluation License
-Version 0.1
+Version 0.2
 
 Copyright (c) 2026 Fumiaki Takashima (tfumiaki). All rights reserved.
 
@@ -13,12 +13,19 @@ published as part of the alpha distribution.
 
 1. Definitions
 
-"Tokilog" means the Tokilog CLI software and related files distributed
-as alpha release assets by the copyright holder.
+"Tokilog" means the Tokilog command-line application ("Tokilog CLI"), the
+Tokilog desktop application ("Tokilog Desktop"), and related files
+distributed as alpha release assets by the copyright holder.
 
-"Alpha Binary" means a compiled Tokilog release asset, including files
-such as `tokilog-net10.0-win-x64.zip` and
-`tokilog-net10.0-osx-arm64.zip`.
+"Alpha Binary" means a compiled Tokilog release asset and the files it
+contains, including:
+
+- `tokilog-cli-net10.0-win-x64.zip`
+- `tokilog-cli-net10.0-osx-arm64.zip`
+- `tokilog-cli-net10.0-linux-x64.zip`
+- `tokilog-desktop-net10.0-win-x64.zip`
+- `tokilog-desktop-net10.0-osx-arm64.zip`
+- `tokilog-desktop-net10.0-linux-x64.zip`
 
 "Evaluation Use" means installing and running an Alpha Binary for personal
 evaluation, internal evaluation, feedback, or compatibility testing.

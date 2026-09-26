@@ -4,6 +4,29 @@
 
 Tokilog はローカル保存を前提にした軽量な時間記録ツールです。CLI では作業開始、停止、今日の記録確認を短いコマンドで実行できます。Desktop GUI は同じローカル DB と Application ロジックを使う alpha build です。
 
+<!-- toc -->
+
+## 目次
+
+- [対象環境](#対象環境)
+- [1. GitHub Releases から取得する](#1-github-releases-から取得する)
+- [2. CLI の展開先を決める](#2-cli-の展開先を決める)
+- [3. CLI に実行権限を付与する](#3-cli-に実行権限を付与する)
+- [4. CLI を PATH に追加する](#4-cli-を-path-に追加する)
+- [5. CLI の動作確認をする](#5-cli-の動作確認をする)
+- [6. 最初に試すコマンド](#6-最初に試すコマンド)
+- [Desktop GUI を試す場合](#desktop-gui-を試す場合)
+- [DB 保存場所](#db-保存場所)
+  - [データディレクトリの上書き（開発・テスト用）](#データディレクトリの上書き開発テスト用)
+  - [既存 DB を使い続ける場合（`TOKILOG_DB_PATH` からの移行）](#既存-db-を使い続ける場合tokilog_db_path-からの移行)
+- [ログ保存場所](#ログ保存場所)
+- [`--debug` を使う](#--debug-を使う)
+- [補完を使う場合](#補完を使う場合)
+- [アンインストール](#アンインストール)
+- [トラブルシュート](#トラブルシュート)
+
+<!-- /toc -->
+
 ## 対象環境
 
 - macOS
@@ -157,7 +180,7 @@ macOS Desktop GUI は experimental unsigned build です。Developer ID signing 
 
 将来的に signing / notarization / dmg packaging を検討します。
 
-Desktop GUI も CLI と同じローカル SQLite DB を使います。初回セットアップや schema upgrade が必要な場合は、CLI で `tl upgrade` を実行してから Desktop GUI を起動してください。
+Desktop GUI も CLI と同じローカル SQLite DB を使います。初回セットアップや schema upgrade が必要な場合は、起動画面に [Set up database] / [Upgrade database] が出ます。ほかの Tokilog（CLI を含む）を閉じてから押すと、DB の写しを DB の隣に保存してから upgrade します。CLI で `tl upgrade` を実行してから Desktop GUI を起動しても構いません。
 
 ## DB 保存場所
 

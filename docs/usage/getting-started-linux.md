@@ -6,6 +6,28 @@ Tokilog はローカル保存を前提にした軽量な時間記録ツールで
 
 この手順は Linux (Ubuntu) 向けです。macOS / Windows 向け Getting Started、deb / AppImage / Flatpak などのパッケージ、自動導入スクリプトは対象外です。
 
+<!-- toc -->
+
+## 目次
+
+- [対象環境](#対象環境)
+  - [Desktop GUI に必要な OS パッケージ](#desktop-gui-に必要な-os-パッケージ)
+- [1. zip を取得する](#1-zip-を取得する)
+- [2. CLI zip を展開する](#2-cli-zip-を展開する)
+  - [実行権限を付与する](#実行権限を付与する)
+- [3. CLI を PATH に追加する](#3-cli-を-path-に追加する)
+- [4. CLI の動作確認をする](#4-cli-の動作確認をする)
+- [5. 最初に試すコマンド](#5-最初に試すコマンド)
+- [Desktop GUI を試す場合](#desktop-gui-を試す場合)
+- [データ保存場所](#データ保存場所)
+  - [データディレクトリの上書き（開発・テスト用）](#データディレクトリの上書き開発テスト用)
+- [ログ保存場所と --debug](#ログ保存場所と---debug)
+- [Tab 補完を使う場合](#tab-補完を使う場合)
+- [アンインストール](#アンインストール)
+- [トラブルシュート](#トラブルシュート)
+
+<!-- /toc -->
+
 ## 対象環境
 
 - Ubuntu 22.04 / 24.04（x64）
@@ -154,7 +176,7 @@ mkdir -p ~/tools \
 
 GUI の起動には上記「Desktop GUI に必要な OS パッケージ」が必要です。
 
-Desktop GUI も CLI と同じローカル SQLite DB を使います。初回セットアップや schema upgrade が必要な場合は、CLI で `tl upgrade` を実行してから Desktop GUI を起動してください。
+Desktop GUI も CLI と同じローカル SQLite DB を使います。初回セットアップや schema upgrade が必要な場合は、起動画面に [Set up database] / [Upgrade database] が出ます。ほかの Tokilog（CLI を含む）を閉じてから押すと、DB の写しを DB の隣に保存してから upgrade します。CLI で `tl upgrade` を実行してから Desktop GUI を起動しても構いません。
 
 ## データ保存場所
 
