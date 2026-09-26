@@ -6,6 +6,29 @@ Tokilog はローカル保存を前提にした軽量な時間記録ツールで
 
 この手順は Windows 向けです。macOS / Linux 向け Getting Started、MSI / MSIX などのインストーラー、`install.ps1` による自動導入は対象外です。
 
+<!-- toc -->
+
+## 目次
+
+- [対象環境](#対象環境)
+- [1. zip を取得する](#1-zip-を取得する)
+- [2. CLI zip を展開する](#2-cli-zip-を展開する)
+- [3. CLI を PATH に追加する](#3-cli-を-path-に追加する)
+- [4. CLI の動作確認をする](#4-cli-の動作確認をする)
+- [5. 最初に試すコマンド](#5-最初に試すコマンド)
+- [Desktop GUI を試す場合](#desktop-gui-を試す場合)
+- [PowerShell 特有の入力ルール](#powershell-特有の入力ルール)
+  - [tl shell で引用符なしに入力する](#tl-shell-で引用符なしに入力する)
+- [データ保存場所](#データ保存場所)
+  - [データディレクトリの上書き（開発・テスト用）](#データディレクトリの上書き開発テスト用)
+  - [既存 DB を使い続ける場合（`TOKILOG_DB_PATH` からの移行）](#既存-db-を使い続ける場合tokilog_db_path-からの移行)
+- [ログ保存場所と --debug](#ログ保存場所と---debug)
+- [Tab 補完を使う場合](#tab-補完を使う場合)
+- [アンインストール](#アンインストール)
+- [トラブルシュート](#トラブルシュート)
+
+<!-- /toc -->
+
 ## 対象環境
 
 - Windows 10 / 11
@@ -133,16 +156,17 @@ Desktop GUI を試す場合は、`tokilog-desktop-net10.0-win-x64.zip` を任意
 
 zip の中に `win-x64` フォルダーが入っている場合は、その中の `Tokilog.Desktop.exe` を実行してください。
 
-Desktop GUI も CLI と同じローカル SQLite DB を使います。初回セットアップや schema upgrade が必要な場合は、CLI で `tl upgrade` を実行してから Desktop GUI を起動してください。
+Desktop GUI も CLI と同じローカル SQLite DB を使います。初回セットアップや schema upgrade が必要な場合は、起動画面に [Set up database] / [Upgrade database] が出ます。ほかの Tokilog（CLI を含む）を閉じてから押すと、DB の写しを DB の隣に保存してから upgrade します。CLI で `tl upgrade` を実行してから Desktop GUI を起動しても構いません。
 
 ## PowerShell 特有の入力ルール
 
-PowerShell では `@` と `#` が shell 固有の構文として扱われます。Tokilog で project (`@project`) や tag (`#tag`) を入力するときは、必ずダブルクォートで囲んでください。
+PowerShell では `@`・`#`・丸括弧が shell 固有の構文として扱われます。Tokilog で project (`@project`) や tag (`#tag`)、丸括弧を含む作業内容を入力するときは、必ずダブルクォートで囲んでください。
 
 | 文字 | PowerShell での扱い | Tokilog での入力例 |
 |------|-------------------|------------------|
 | `#` | コメント開始。`#` 以降の入力がすべて無視される | `"#docs"` |
 | `@` | splatting 演算子。変数展開が試みられエラーになることがある | `"@tokilog"` |
+| `(` `)` | PowerShell の構文として扱われ、エラーになることがある | `"会議(定例)"` |
 
 ```powershell
 # 正しい: ダブルクォートで囲む
@@ -156,6 +180,24 @@ tl start "Getting Started を読む" @tokilog "#docs"
 ```
 
 `"#docs"` や `"@tokilog"` の引用符は PowerShell に対してのもので、Tokilog に渡る値は `#docs` / `@tokilog` と同じです。`#` の問題はエラーが出ず tag が無視されるだけなので特に注意してください。
+
+### tl shell で引用符なしに入力する
+
+`tl shell` を起動すると、入力を PowerShell ではなく Tokilog 自身が解釈します。`@`・`#`・丸括弧をそのまま書けます。
+
+```powershell
+tl shell
+```
+
+```console
+tokilog> start Getting Started を読む @tokilog #docs
+tokilog> stop
+tokilog> exit
+```
+
+**`tl shell` の中では Tab 補完は使えません。** 補完を使いたいときは [Tab 補完を使う場合](#tab-補完を使う場合) の手順で設定し、PowerShell から `tl` を直接実行してください（その場合は上の表のとおり引用符が要ります）。
+
+詳しくは [CLI マニュアルの対話モード](cli-manual.md#対話モード) を参照してください。
 
 ## データ保存場所
 

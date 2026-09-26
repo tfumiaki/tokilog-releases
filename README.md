@@ -24,6 +24,7 @@ Tokilog は現在 alpha 段階です。CLI (`tl`) と Desktop GUI を配布し�
 - [macOS Getting Started](docs/usage/getting-started-macos.md)
 - [Linux (Ubuntu) Getting Started](docs/usage/getting-started-linux.md)
 - [CLI Manual](docs/usage/cli-manual.md)
+- [Desktop GUI Manual](docs/usage/gui-manual.md)
 - [CLI Tab Completion](docs/usage/completion.md)
 
 ## Runtime

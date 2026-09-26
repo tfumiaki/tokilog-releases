@@ -10,7 +10,9 @@ Tokilog の利用者向けセットアップ手順や操作ガイドを格納し
    - macOS: [getting-started-macos.md](./getting-started-macos.md)
    - Windows: [getting-started-windows.md](./getting-started-windows.md)
    - Linux (Ubuntu): [getting-started-linux.md](./getting-started-linux.md)
-2. CLI の日常操作コマンドは [cli-manual.md](./cli-manual.md) を参照する
+2. 日常操作は、使うほうのマニュアルを参照する
+   - CLI (`tl`): [cli-manual.md](./cli-manual.md)
+   - Desktop GUI: [gui-manual.md](./gui-manual.md)
 3. （任意）Tab 補完を使う場合は [completion.md](./completion.md) をセットアップする
 
 ## ドキュメント一覧
@@ -21,6 +23,7 @@ Tokilog の利用者向けセットアップ手順や操作ガイドを格納し
 | [getting-started-windows.md](./getting-started-windows.md) | Windows 向け Tokilog Getting Started |
 | [getting-started-linux.md](./getting-started-linux.md) | Linux (Ubuntu) 向け Tokilog Getting Started |
 | [cli-manual.md](./cli-manual.md) | Tokilog CLI の日常操作マニュアル |
+| [gui-manual.md](./gui-manual.md) | Tokilog Desktop GUI の日常操作マニュアル |
 | [completion.md](./completion.md) | Tokilog CLI Tab 補完の利用手順（任意） |
 
 ## 不具合報告・要望
