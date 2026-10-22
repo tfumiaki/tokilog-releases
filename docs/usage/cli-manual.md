@@ -489,7 +489,15 @@ tl db bundle create --output ./tokilog.tokilog-backup --force
 tl db bundle restore ./tokilog.tokilog-backup --force
 ```
 
-復元で戻った過去の日の自動エクスポートは、自動では出し直されません。自動エクスポートを使っている場合は、復元した記録を含む期間を指定して再生成してください。
+束には `export.auto.path` と `export.auto.sourceId` は入らず、復元先の値をそのまま使います。新しい環境では出力先が未設定で、自動エクスポートも無効になるため、先に復元先の絶対パスを設定して有効にしてください。端末ごとに出力を分ける名前を固定したい場合は、`export.auto.sourceId` も設定します。
+
+```console
+tl config set export.auto.path <絶対パス>
+tl config set export.auto.enabled true
+tl config set export.auto.sourceId <この端末の識別子>
+```
+
+復元で戻った過去の日の自動エクスポートは、自動では出し直されません。設定後、復元した記録を含む期間を指定して再生成してください。
 
 ```console
 tl export auto sync --from <日付> --to <日付>
@@ -511,7 +519,7 @@ tokilog> stop
 tokilog> exit
 ```
 
-- 終了コマンドは `exit` または `quit` です。入力の誤り（解釈・検証のエラー）やコマンドの実行エラーでは、shell は終了しません。**例外は `upgrade` と `db bundle create` の `E909`** で、このときは次の入力を実行せずに shell が終了します（[`tl upgrade`](#tl-upgrade) の表と [別の環境へ移すための束を作る](#別の環境へ移すための束を作る) を参照）
+- 終了コマンドは `exit` または `quit` です。入力の誤り（解釈・検証のエラー）やコマンドの実行エラーでは、shell は終了しません。**例外は `upgrade` と `db bundle create` / `db bundle restore` の `E909`** で、このときは次の入力を実行せずに shell が終了します（[`tl upgrade`](#tl-upgrade) の表と [別の環境へ移すための束を作る](#別の環境へ移すための束を作る) を参照）
 - **入力は Tokilog 自身が解釈します。** bash / zsh / PowerShell では `#tag` がコメントとして捨てられ、PowerShell では `@` や丸括弧も構文として扱われますが、`tl shell` の中ではそのどちらも起きません。`@project` や `#tag` を引用符なしで入力できます
 - **`tl shell` の中では Tab 補完は使えません。** 補完が必要なときは、[Tab 補完](#tab-補完) を設定し、通常の shell から `tl` を直接実行してください
 
@@ -663,9 +671,9 @@ Tokilog では、初回セットアップ時や Tokilog を新しいバージョ
 
 `tl doctor` は migration 状態を確認する read-only 診断です。`Migrations: NG - Pending (run tl upgrade)` と表示された場合は `tl upgrade` を実行してください。
 
-`tl upgrade` は、実行しているあいだ **upgrade ロック**を持ちます。DB と同じフォルダの `tokilog.db.upgrade.lock` を OS の機能でロックし、この仕組みを持つ Tokilog どうしで、upgrade と次の `tl db unlock-upgrade` が同時に走らないようにします。このファイルは空のまま残り、削除しません（消さないでください）。ほかのコマンドの読み書きは止めません。
+`tl upgrade`、`tl db unlock-upgrade`、`tl db bundle create`、`tl db bundle restore` は、実行しているあいだ **upgrade ロック**を持ちます。DB と同じフォルダの `tokilog.db.upgrade.lock` を OS の機能でロックし、この仕組みを持つ Tokilog どうしで、これらの処理が同時に走らないようにします。このファイルは空のまま残り、削除しません（消さないでください）。これら以外のコマンドの読み書きは止めません。
 
-upgrade ロックが確かめるのは「**この仕組みを持つ Tokilog が、同じ PC で upgrade またはロックの解除を実行していない**」ことだけです。**この仕組みを持たない古い版の Tokilog・ほかの PC・ネットワーク上のフォルダ**で動いている upgrade は見えません。
+upgrade ロックが確かめるのは「**この仕組みを持つ Tokilog が、同じ PC で upgrade・ロックの解除・バックアップの束の作成または復元を実行していない**」ことだけです。**この仕組みを持たない古い版の Tokilog・ほかの PC・ネットワーク上のフォルダ**で動いている処理は見えません。
 
 `tl upgrade` は次のときに、待たずに止まります（終了コードは `1`）。
 
