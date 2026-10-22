@@ -19,6 +19,7 @@ Tokilog はローカル保存を前提にした軽量な時間記録ツールで
 - [Desktop GUI を試す場合](#desktop-gui-を試す場合)
 - [PowerShell 特有の入力ルール](#powershell-特有の入力ルール)
   - [tl shell で引用符なしに入力する](#tl-shell-で引用符なしに入力する)
+- [自動エクスポートを使う場合](#自動エクスポートを使う場合)
 - [データ保存場所](#データ保存場所)
   - [データディレクトリの上書き（開発・テスト用）](#データディレクトリの上書き開発テスト用)
   - [既存 DB を使い続ける場合（`TOKILOG_DB_PATH` からの移行）](#既存-db-を使い続ける場合tokilog_db_path-からの移行)
@@ -199,6 +200,17 @@ tokilog> exit
 **`tl shell` の中では Tab 補完は使えません。** 補完を使いたいときは [Tab 補完を使う場合](#tab-補完を使う場合) の手順で設定し、PowerShell から `tl` を直接実行してください（その場合は上の表のとおり引用符が要ります）。
 
 詳しくは [CLI マニュアルの対話モード](cli-manual.md#対話モード) を参照してください。
+
+## 自動エクスポートを使う場合
+
+`export.auto.path` には絶対パスを設定します。以前の版で相対パスを設定していた場合、この版では自動エクスポートを行わず、`tl export auto status` の `output root` は `(invalid)` と表示されます。移行先のフォルダーを決め、絶対パスへ設定し直してください。
+
+```powershell
+tl config set export.auto.path "C:\Users\me\Documents\tokilog-outbox"
+tl export auto status
+```
+
+詳しい設定と同期方法は [CLI manual の自動エクスポート](./cli-manual.md#自動エクスポートtl-export-auto) を参照してください。
 
 ## データ保存場所
 

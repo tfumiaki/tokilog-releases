@@ -370,7 +370,7 @@ tl export markdown --from 2026-05-01 --to 2026-05-31 > tokilog.md
 - `--from` / `--to` を省略した場合は今日が対象です。
 - `export.auto.format` が未設定の場合は `markdown` を使用します。
 - `export.auto.sourceId` が未設定の場合はホスト名（小文字）を使用します。
-- `export.auto.path` が未設定の場合はエラーになります。
+- `export.auto.path` が未設定、または絶対パスでない場合はエラーになります。
 - `export.auto.enabled` が `false` でも、明示的な `tl export auto sync` は実行できます。
 - ファイルは一時ファイルへ書き出した後にリネームする方式で、途中書き込み失敗による破損ファイルの残留を避けます。
 - 実行結果には、今回書き出したファイルパス一覧（エントリ 0 件でスキップした日は除く）が表示されます。
@@ -400,6 +400,8 @@ tl export auto sync --from 2026-05-01 --to 2026-05-31
 ```
 
 実行結果の最終状態（最終成功時刻・最終エラー・最後に sync した範囲）は `export-state.json` に記録されます。
+
+> **以前の版から更新する場合**: `export.auto.path` に相対パスを設定していた場合、この版では自動エクスポートを行わずに止まり、`tl export auto status` の `output root` は `(invalid)` と表示されます。移行先の絶対パスを決めて、たとえば `tl config set export.auto.path "C:\\Users\\me\\Documents\\tokilog-outbox"`（Windows）または `tl config set export.auto.path "/Users/me/Documents/tokilog-outbox"`（macOS / Linux）のように設定し直してください。
 
 ## config
 
@@ -480,6 +482,16 @@ tl db bundle create --output ./tokilog.tokilog-backup --force
 - 出力先の名前が `tokilog.db`、または `.upgrade.lock`・`-wal`・`-shm`・`-journal` で終わるときは、`--force` を付けても作りません（`E922`。大文字小文字を問いません。Windows では名前に `:` を含むものも作りません）
 
 **束は暗号化しません。記録の中身がそのまま入っています。** 共有フォルダーやクラウドの公開の場所など、ほかの人が読める場所に置かないでください。
+
+移動先の環境では、Tokilog（Desktop とほかの `tl` を含む）をすべて閉じてから、束を指定して復元します。現在の DB と設定を置き換える操作なので、`--force` が必須です。復元前には現在の DB と設定の写しを作ります。
+
+```console
+tl db bundle restore ./tokilog.tokilog-backup --force
+```
+
+束が新しい版の Tokilog で作られていて復元できない場合は、Tokilog を更新してからもう一度実行してください。復元の途中で失敗した場合は、表示された復元前バックアップや設定の写しを消さず、エラーメッセージに従ってください。
+
+作成または復元の結果が先に表示されたあとで `E909` が出ることがあります。この場合、その結果自体は取り消されませんが、DB への古い接続を片付けられなかったため、**同じプロセスでは続けてコマンドを実行しないでください**。`tl shell` はその場で終了します。通常の `tl` でも `tl shell` でも、`tl` を起動し直してから次の操作を行ってください。
 
 ## 対話モード
 
