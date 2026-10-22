@@ -497,6 +497,12 @@ tl config set export.auto.enabled true
 tl config set export.auto.sourceId <この端末の識別子>
 ```
 
+復元の表示で、束の DB が古いため `tl upgrade` を実行するよう案内された場合は、設定や再生成より先に実行してください。
+
+```console
+tl upgrade
+```
+
 復元で戻った過去の日の自動エクスポートは、自動では出し直されません。設定後、復元した記録を含む期間を指定して再生成してください。
 
 ```console
