@@ -65,16 +65,16 @@ The following packages are published by Microsoft and use the MIT License.
 - System.CommandLine 2.0.0-beta5.25306.1
 
 [Desktop]
-- SkiaSharp 2.88.9
-- SkiaSharp.NativeAssets.Linux 2.88.9
-- SkiaSharp.NativeAssets.macOS 2.88.9
-- SkiaSharp.NativeAssets.WebAssembly 2.88.9
-- SkiaSharp.NativeAssets.Win32 2.88.9
-- HarfBuzzSharp 7.3.0.3
-- HarfBuzzSharp.NativeAssets.Linux 7.3.0.3
-- HarfBuzzSharp.NativeAssets.macOS 7.3.0.3
-- HarfBuzzSharp.NativeAssets.WebAssembly 7.3.0.3
-- HarfBuzzSharp.NativeAssets.Win32 7.3.0.3
+- SkiaSharp 3.119.4
+- SkiaSharp.NativeAssets.Linux 3.119.4
+- SkiaSharp.NativeAssets.macOS 3.119.4
+- SkiaSharp.NativeAssets.WebAssembly 3.119.4
+- SkiaSharp.NativeAssets.Win32 3.119.4
+- HarfBuzzSharp 8.3.1.3
+- HarfBuzzSharp.NativeAssets.Linux 8.3.1.3
+- HarfBuzzSharp.NativeAssets.macOS 8.3.1.3
+- HarfBuzzSharp.NativeAssets.WebAssembly 8.3.1.3
+- HarfBuzzSharp.NativeAssets.Win32 8.3.1.3
 
 Copyright notice from the NuGet package metadata:
 
@@ -101,21 +101,23 @@ The following packages are published by the Avalonia Team and use the MIT
 License.
 
 [Desktop]
-- Avalonia 11.2.8
-- Avalonia.Desktop 11.2.8
-- Avalonia.Fonts.Inter 11.2.8
-- Avalonia.FreeDesktop 11.2.8
-- Avalonia.Native 11.2.8
-- Avalonia.Remote.Protocol 11.2.8
-- Avalonia.Skia 11.2.8
-- Avalonia.Themes.Fluent 11.2.8
-- Avalonia.Win32 11.2.8
-- Avalonia.X11 11.2.8
-- Avalonia.BuildServices 0.0.31
+- Avalonia 12.1.3
+- Avalonia.Desktop 12.1.3
+- Avalonia.Fonts.Inter 12.1.3
+- Avalonia.FreeDesktop 12.1.3
+- Avalonia.FreeDesktop.AtSpi 12.1.3
+- Avalonia.HarfBuzz 12.1.3
+- Avalonia.Native 12.1.3
+- Avalonia.Remote.Protocol 12.1.3
+- Avalonia.Skia 12.1.3
+- Avalonia.Themes.Fluent 12.1.3
+- Avalonia.Win32 12.1.3
+- Avalonia.X11 12.1.3
+- Avalonia.BuildServices 11.3.2
 
 Copyright notice from the NuGet package metadata:
 
-Copyright 2013-2025 © The AvaloniaUI Project
+Copyright 2013-2026 © The AvaloniaUI Project
 
 License: MIT License (https://licenses.nuget.org/MIT)
 
@@ -126,7 +128,7 @@ ANGLE (Avalonia.Angle.Windows.Natives)
 --------------------------------------
 
 [Desktop, Windows]
-- Avalonia.Angle.Windows.Natives 2.1.22045.20230930
+- Avalonia.Angle.Windows.Natives 2.1.27548.20260419
 
 This package redistributes ANGLE. Its license text, as included in the
 package, is reproduced below.
@@ -202,19 +204,20 @@ Other packages
 --------------
 
 [Desktop]
-- MicroCom.Runtime 0.11.0
+- MicroCom.Runtime 0.11.6
   Copyright 2021 © Nikita Tsukanov
   License: MIT License (https://licenses.nuget.org/MIT)
 
-- Tmds.DBus.Protocol 0.21.3
+- Tmds.DBus.Protocol 0.94.1
   Copyright Tom Deseyn
   License: MIT License (https://licenses.nuget.org/MIT)
 
-- Projektanker.Icons.Avalonia 9.6.2
-- Projektanker.Icons.Avalonia.FontAwesome 9.6.2
-  Author (from the NuGet package metadata): Sebastian Rumohr
+- Optris.Icons.Avalonia 12.0.7
+- Optris.Icons.Avalonia.FontAwesome 12.0.7
+  Authors (from the NuGet package metadata): Optris GmbH, original by
+  Sebastian Rumohr (Projektanker GmbH)
   License: MIT License (https://licenses.nuget.org/MIT)
-  Source repository: https://github.com/Projektanker/Icons.Avalonia
+  Source repository: https://github.com/Optris/Optris.Icons.Avalonia
 
 
 Fonts and icon data
@@ -232,7 +235,7 @@ Fonts and icon data
   License: SIL Open Font License, Version 1.1
 
 - Font Awesome 6 Free icon data (embedded in
-  Projektanker.Icons.Avalonia.FontAwesome)
+  Optris.Icons.Avalonia.FontAwesome)
   Font Awesome by Fonticons, Inc. (https://fontawesome.com)
   License: Font Awesome Free License (https://fontawesome.com/license/free);
   the icons are licensed under CC BY 4.0
