@@ -58,8 +58,8 @@ The following packages are published by Microsoft and use the MIT License.
 - Microsoft.Extensions.Logging.Abstractions 10.0.9
 - Microsoft.Extensions.Options 10.0.9
 - Microsoft.Extensions.Primitives 10.0.9
-- System.Security.Cryptography.Pkcs 10.0.10
-- System.Security.Cryptography.Xml 10.0.10
+- System.Security.Cryptography.Pkcs 10.0.13
+- System.Security.Cryptography.Xml 10.0.13
 
 [CLI]
 - System.CommandLine 2.0.0-beta5.25306.1
